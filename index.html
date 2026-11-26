@@ -1,0 +1,1591 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MAAF SISTEMAS | Sistemas Web Sob Medida 100% em Nuvem</title>
+  <meta name="description" content="Desenvolvimento de sistemas web personalizados para qualquer ramo. Acesso pelo celular e navegador sem instalação local, com banco de dados 100% em nuvem." />
+  <link rel="icon" type="image/png" href="somentelogo.png" />
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Plus Jakarta Sans', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              50: '#eff6ff',
+              100: '#dbeafe',
+              200: '#bfdbfe',
+              300: '#93c5fd',
+              400: '#38bdf8',
+              500: '#0ea5e9',
+              600: '#0284c7',
+              700: '#0369a1',
+              800: '#075985',
+              900: '#0c4a6e',
+              950: '#06152d',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    h1, h2, h3, h4, .font-display { font-family: 'Plus Jakarta Sans', sans-serif; }
+    .glass-nav {
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-900 dark:bg-[#061224] dark:text-slate-100 transition-colors duration-300 antialiased selection:bg-brand-600 selection:text-white">
+
+  <!-- ===================================================================== -->
+  <!-- CONFIGURAÇÕES MAAF SISTEMAS, FIREBASE E CLOUDINARY                    -->
+  <!-- ===================================================================== -->
+  <script>
+    const CONFIG = {
+      EMPRESA_NOME: "MAAF SISTEMAS",
+      WHATSAPP_NUMBER: "5522981391262",
+      TELEFONE_FORMATADO: "(22) 98139-1262",
+      CIDADE_REGIAO: "Itaperuna - RJ e Atendimento Remoto para todo o Brasil",
+      INATIVIDADE_MINUTOS: 15,
+
+      FIREBASE: {
+        apiKey: "AIzaSyC8nb_BiwTAFtVhAZeZfXeBfWDE81iWwVo",
+        authDomain: "maafsistemas.firebaseapp.com",
+        projectId: "maafsistemas",
+        storageBucket: "maafsistemas.firebasestorage.app",
+        messagingSenderId: "309924342117",
+        appId: "1:309924342117:web:8b99d13b58e0333f8e998c"
+      },
+
+      CLOUDINARY: {
+        cloudName: "SEU_CLOUD_NAME",
+        uploadPreset: "SEU_UPLOAD_PRESET"
+      }
+    };
+  </script>
+
+  <!-- ===================================================================== -->
+  <!-- VIEW 1: SITE PÚBLICO (LANDING PAGE COMERCIAL)                         -->
+  <!-- ===================================================================== -->
+  <div id="publicView">
+
+    <!-- NAVBAR -->
+    <header class="fixed top-0 inset-x-0 z-40 glass-nav bg-white/85 dark:bg-[#061224]/85 border-b border-slate-200/80 dark:border-slate-800/80 transition-colors">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between">
+        
+        <a href="#" class="flex items-center gap-3 group">
+          <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-600 to-cyan-400 flex items-center justify-center text-white shadow-lg shadow-cyan-500/20 group-hover:scale-105 transition-transform overflow-hidden shrink-0">
+            <img src="somentelogo.png" alt="MAAF" class="w-full h-full object-contain p-1" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+            <i data-lucide="layers" class="w-6 h-6 hidden"></i>
+          </div>
+          <div class="flex flex-col">
+            <span class="font-display font-extrabold text-lg sm:text-xl tracking-tight leading-none text-slate-900 dark:text-white">
+              MAAF <span class="text-brand-600 dark:text-cyan-400">SISTEMAS</span>
+            </span>
+            <span class="text-[10px] sm:text-[11px] font-semibold text-slate-500 dark:text-slate-400 tracking-wider uppercase mt-0.5">
+              Sistemas Web em Nuvem
+            </span>
+          </div>
+        </a>
+
+        <nav class="hidden md:flex items-center gap-7 text-sm font-medium text-slate-600 dark:text-slate-300">
+          <a href="#diferenciais" class="hover:text-brand-600 dark:hover:text-cyan-400 transition-colors">Por que Sob Medida?</a>
+          <a href="#solucoes" class="hover:text-brand-600 dark:hover:text-cyan-400 transition-colors">O que Criamos</a>
+          <a href="#portfolio" class="hover:text-brand-600 dark:hover:text-cyan-400 transition-colors">Cases Reais</a>
+          <a href="#como-funciona" class="hover:text-brand-600 dark:hover:text-cyan-400 transition-colors">Como Funciona</a>
+        </nav>
+
+        <div class="flex items-center gap-2 sm:gap-2.5">
+          <button onclick="toggleTheme()" aria-label="Alternar tema" title="Alternar tema claro/escuro"
+            class="p-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-100/80 dark:bg-slate-900 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors cursor-pointer">
+            <i data-lucide="sun" class="w-4 h-4 sm:w-5 sm:h-5 hidden dark:block text-amber-400"></i>
+            <i data-lucide="moon" class="w-4 h-4 sm:w-5 sm:h-5 block dark:hidden text-slate-700"></i>
+          </button>
+
+          <button onclick="openAdminPortal()" title="Área Administrativa MAAF"
+            class="p-2.5 sm:px-3.5 sm:py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-100/80 dark:bg-slate-900 text-slate-700 dark:text-slate-300 hover:border-brand-500/50 hover:text-brand-600 dark:hover:text-cyan-400 transition-colors flex items-center gap-1.5 text-xs font-semibold cursor-pointer">
+            <i data-lucide="shield" class="w-4 h-4"></i>
+            <span class="hidden lg:inline">Admin</span>
+          </button>
+
+          <a href="#contato" class="hidden sm:inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white text-sm font-semibold shadow-md shadow-cyan-500/20 transition-all">
+            <span>Solicitar Orçamento</span>
+            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </a>
+
+          <button id="mobileMenuBtn" aria-label="Abrir menu" class="md:hidden p-2.5 rounded-xl border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300">
+            <i data-lucide="menu" class="w-5 h-5"></i>
+          </button>
+        </div>
+      </div>
+
+      <div id="mobileMenu" class="hidden md:hidden border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-[#061224] px-4 pt-3 pb-5 space-y-2">
+        <a href="#diferenciais" class="mobile-link block py-2.5 px-3 rounded-xl text-sm font-medium hover:bg-slate-100 dark:hover:bg-slate-900">Por que Sob Medida?</a>
+        <a href="#solucoes" class="mobile-link block py-2.5 px-3 rounded-xl text-sm font-medium hover:bg-slate-100 dark:hover:bg-slate-900">O que Criamos</a>
+        <a href="#portfolio" class="mobile-link block py-2.5 px-3 rounded-xl text-sm font-medium hover:bg-slate-100 dark:hover:bg-slate-900">Cases Reais</a>
+        <a href="#como-funciona" class="mobile-link block py-2.5 px-3 rounded-xl text-sm font-medium hover:bg-slate-100 dark:hover:bg-slate-900">Como Funciona</a>
+        <div class="pt-2 grid grid-cols-2 gap-2">
+          <button onclick="openAdminPortal()" class="flex items-center justify-center gap-2 py-3 rounded-xl border border-slate-300 dark:border-slate-700 text-sm font-semibold">
+            <i data-lucide="shield" class="w-4 h-4"></i>
+            <span>Área Admin</span>
+          </button>
+          <a href="#contato" class="mobile-link flex items-center justify-center gap-2 py-3 rounded-xl bg-brand-600 text-white text-sm font-semibold">
+            <span>Orçamento</span>
+            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="relative pt-28 pb-16 sm:pt-36 sm:pb-24 overflow-hidden">
+      <div class="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
+        <div class="absolute -top-24 left-1/2 -translate-x-1/2 w-[900px] h-[450px] bg-gradient-to-tr from-blue-600/15 via-cyan-400/10 to-transparent rounded-full blur-3xl"></div>
+      </div>
+
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid lg:grid-cols-12 gap-12 items-center">
+          
+          <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50 dark:bg-sky-950/80 border border-blue-200 dark:border-sky-800/80 text-blue-700 dark:text-cyan-300 text-xs sm:text-sm font-semibold">
+              <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+              <span>100% Web • Sem Instalação Local • Banco de Dados em Nuvem</span>
+            </div>
+
+            <h1 class="text-3xl sm:text-5xl lg:text-[52px] font-extrabold tracking-tight text-slate-900 dark:text-white leading-[1.12]">
+              O sistema exato que a sua empresa precisa, <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500 dark:from-cyan-400 dark:to-blue-400">na palma da sua mão.</span>
+            </h1>
+
+            <p class="text-base sm:text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+              Chega de planilhas bagunçadas ou softwares prontos que não se adaptam à sua rotina. A <strong>MAAF SISTEMAS</strong> desenvolve sistemas web personalizados para qualquer ramo, acessíveis direto pelo navegador do computador ou celular.
+            </p>
+
+            <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3.5 pt-2">
+              <a href="#contato" class="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-7 py-4 rounded-2xl bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white font-semibold text-base shadow-xl shadow-cyan-500/20 transition-all hover:-translate-y-0.5">
+                <span>Agendar Diagnóstico Gratuito</span>
+                <i data-lucide="arrow-right" class="w-5 h-5"></i>
+              </a>
+              <a href="#portfolio" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-4 rounded-2xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900/90 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 font-semibold text-base transition-colors">
+                <i data-lucide="layout-grid" class="w-5 h-5 text-brand-600 dark:text-cyan-400"></i>
+                <span>Ver Exemplos Reais</span>
+              </a>
+            </div>
+
+            <div class="pt-4 grid grid-cols-3 gap-4 max-w-lg mx-auto lg:mx-0 border-t border-slate-200 dark:border-slate-800/80">
+              <div>
+                <p class="text-lg sm:text-xl font-extrabold text-slate-900 dark:text-white">Zero</p>
+                <p class="text-xs text-slate-500 dark:text-slate-400">Instalação ou servidor local</p>
+              </div>
+              <div>
+                <p class="text-lg sm:text-xl font-extrabold text-slate-900 dark:text-white">100%</p>
+                <p class="text-xs text-slate-500 dark:text-slate-400">Sob medida para sua regra</p>
+              </div>
+              <div>
+                <p class="text-lg sm:text-xl font-extrabold text-slate-900 dark:text-white">Multi-tela</p>
+                <p class="text-xs text-slate-500 dark:text-slate-400">PC, Android e iPhone</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="lg:col-span-5 relative">
+            <div class="relative mx-auto max-w-md lg:max-w-none">
+              <div class="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-2xl overflow-hidden">
+                <div class="px-4 py-3 bg-slate-100 dark:bg-slate-800/90 border-b border-slate-200 dark:border-slate-700/80 flex items-center justify-between">
+                  <div class="flex items-center gap-1.5">
+                    <span class="w-2.5 h-2.5 rounded-full bg-rose-400"></span>
+                    <span class="w-2.5 h-2.5 rounded-full bg-amber-400"></span>
+                    <span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
+                  </div>
+                  <div class="px-3 py-1 rounded-md bg-white dark:bg-slate-950 text-[11px] font-mono text-slate-500 dark:text-slate-400 border border-slate-200 dark:border-slate-700 flex items-center gap-1.5">
+                    <i data-lucide="lock" class="w-3 h-3 text-emerald-500"></i>
+                    <span>app.suaempresa.com.br</span>
+                  </div>
+                  <span class="text-[10px] font-semibold px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">NUVEM</span>
+                </div>
+
+                <div class="p-5 space-y-4">
+                  <div class="flex items-center justify-between">
+                    <div>
+                      <p class="text-xs text-slate-500 dark:text-slate-400">Controle Integrado em Tempo Real</p>
+                      <h3 class="font-bold text-base text-slate-900 dark:text-white">Painel da Operação</h3>
+                    </div>
+                    <span class="inline-flex items-center gap-1 text-xs font-medium text-brand-600 dark:text-cyan-400 bg-blue-50 dark:bg-sky-950 px-2.5 py-1 rounded-lg">
+                      <i data-lucide="cloud" class="w-3.5 h-3.5"></i> Sincronizado
+                    </span>
+                  </div>
+
+                  <div class="grid grid-cols-3 gap-2.5">
+                    <div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/70 dark:border-slate-700/60">
+                      <p class="text-[11px] text-slate-500 dark:text-slate-400">Atendimentos</p>
+                      <p class="text-lg font-extrabold text-slate-900 dark:text-white mt-0.5">64</p>
+                      <span class="text-[10px] text-emerald-600 dark:text-emerald-400 font-semibold">+22% este mês</span>
+                    </div>
+                    <div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/70 dark:border-slate-700/60">
+                      <p class="text-[11px] text-slate-500 dark:text-slate-400">Concluídos</p>
+                      <p class="text-lg font-extrabold text-brand-600 dark:text-cyan-400 mt-0.5">96%</p>
+                      <span class="text-[10px] text-slate-500 dark:text-slate-400">No prazo</span>
+                    </div>
+                    <div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/70 dark:border-slate-700/60">
+                      <p class="text-[11px] text-slate-500 dark:text-slate-400">Caixa Atual</p>
+                      <p class="text-lg font-extrabold text-emerald-600 dark:text-emerald-400 mt-0.5">R$ 28k</p>
+                      <span class="text-[10px] text-emerald-600 dark:text-emerald-400 font-semibold">Atualizado</span>
+                    </div>
+                  </div>
+
+                  <div class="space-y-2">
+                    <p class="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Atividade Ao Vivo</p>
+                    <div class="p-2.5 rounded-xl border border-slate-200/80 dark:border-slate-800 flex items-center justify-between text-xs">
+                      <div class="flex items-center gap-2.5">
+                        <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                        <div>
+                          <p class="font-semibold text-slate-800 dark:text-slate-200">OS #1084 Concluída pelo Celular</p>
+                          <p class="text-[11px] text-slate-500">Comprovante PDF enviado no WhatsApp</p>
+                        </div>
+                      </div>
+                      <span class="text-[11px] font-mono text-slate-400">Agora</span>
+                    </div>
+                    <div class="p-2.5 rounded-xl border border-slate-200/80 dark:border-slate-800 flex items-center justify-between text-xs">
+                      <div class="flex items-center gap-2.5">
+                        <span class="w-2 h-2 rounded-full bg-cyan-500"></span>
+                        <div>
+                          <p class="font-semibold text-slate-800 dark:text-slate-200">Orçamento Aprovado Online</p>
+                          <p class="text-[11px] text-slate-500">Cliente: Grupo Horizonte • R$ 2.450,00</p>
+                        </div>
+                      </div>
+                      <span class="text-[11px] font-mono text-slate-400">3 min</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="hidden sm:flex items-center gap-3 p-3.5 rounded-2xl bg-slate-900 dark:bg-slate-800 text-white shadow-xl border border-slate-700/80 absolute -bottom-6 -left-6 max-w-[245px]">
+                <div class="w-10 h-10 rounded-xl bg-cyan-500/20 text-cyan-400 flex items-center justify-center shrink-0">
+                  <i data-lucide="smartphone" class="w-5 h-5"></i>
+                </div>
+                <div>
+                  <p class="text-xs font-bold">Navegador & Smartphone</p>
+                  <p class="text-[11px] text-slate-300 leading-tight mt-0.5">Lançou na rua, aparece na hora na tela da gestão.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- PROBLEMA VS SOLUÇÃO -->
+    <section id="diferenciais" class="py-16 sm:py-24 bg-white dark:bg-slate-900/40 border-y border-slate-200/80 dark:border-slate-800/80">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto space-y-3 mb-14">
+          <span class="text-xs font-bold uppercase tracking-widest text-brand-600 dark:text-cyan-400">Por que escolher a MAAF SISTEMAS?</span>
+          <h2 class="text-2xl sm:text-4xl font-extrabold text-slate-900 dark:text-white">
+            Não adapte sua empresa ao sistema. Nós moldamos o sistema à sua empresa.
+          </h2>
+          <p class="text-slate-600 dark:text-slate-400 text-sm sm:text-base">
+            Sistemas genéricos cobram caro por funções que você nunca usa e deixam de fora exatamente o controle que você mais precisa.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-8">
+          <div class="p-6 sm:p-8 rounded-3xl border border-rose-200/80 dark:border-rose-900/40 bg-rose-50/40 dark:bg-rose-950/10 space-y-5">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-100 dark:bg-rose-900/40 text-rose-700 dark:text-rose-300 text-xs font-bold">
+              <i data-lucide="x-circle" class="w-4 h-4"></i>
+              <span>O que trava o crescimento hoje</span>
+            </div>
+            <h3 class="text-xl font-bold text-slate-900 dark:text-white">Planilhas espalhadas e sistemas engessados</h3>
+            <ul class="space-y-3.5 text-sm text-slate-700 dark:text-slate-300">
+              <li class="flex items-start gap-3">
+                <i data-lucide="x" class="w-5 h-5 text-rose-500 shrink-0 mt-0.5"></i>
+                <span>Informações perdidas em cadernos, grupos de WhatsApp ou várias planilhas desatualizadas.</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <i data-lucide="x" class="w-5 h-5 text-rose-500 shrink-0 mt-0.5"></i>
+                <span>Programas locais que só funcionam em um único computador preso no escritório.</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <i data-lucide="x" class="w-5 h-5 text-rose-500 shrink-0 mt-0.5"></i>
+                <span>Risco constante de perder dados caso o computador queime ou dê defeito.</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <i data-lucide="x" class="w-5 h-5 text-rose-500 shrink-0 mt-0.5"></i>
+                <span>Falta de visão rápida sobre pagamentos, pendências e produtividade da equipe.</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="p-6 sm:p-8 rounded-3xl border border-cyan-200 dark:border-sky-800/80 bg-gradient-to-br from-blue-50/70 to-cyan-50/40 dark:from-sky-950/40 dark:to-slate-900 space-y-5 shadow-lg shadow-cyan-500/5">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-100 dark:bg-sky-900/60 text-blue-700 dark:text-cyan-300 text-xs font-bold">
+              <i data-lucide="check-circle-2" class="w-4 h-4"></i>
+              <span>O padrão MAAF SISTEMAS</span>
+            </div>
+            <h3 class="text-xl font-bold text-slate-900 dark:text-white">Controle sob medida, moderno e 100% em nuvem</h3>
+            <ul class="space-y-3.5 text-sm text-slate-700 dark:text-slate-200">
+              <li class="flex items-start gap-3">
+                <i data-lucide="check" class="w-5 h-5 text-emerald-500 shrink-0 mt-0.5"></i>
+                <span><strong>Zero instalação:</strong> Abriu o navegador no PC ou smartphone, entrou, já está usando.</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <i data-lucide="check" class="w-5 h-5 text-emerald-500 shrink-0 mt-0.5"></i>
+                <span><strong>Banco de dados 100% em nuvem:</strong> Segurança, backups automáticos e acesso simultâneo.</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <i data-lucide="check" class="w-5 h-5 text-emerald-500 shrink-0 mt-0.5"></i>
+                <span><strong>Telas desenhadas para o seu fluxo:</strong> Cada campo e relatório criado para o seu ramo.</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <i data-lucide="check" class="w-5 h-5 text-emerald-500 shrink-0 mt-0.5"></i>
+                <span><strong>Integração prática com WhatsApp e PDF:</strong> Envie orçamentos, recibos e cobranças com 1 clique.</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MÓDULOS E SOLUÇÕES -->
+    <section id="solucoes" class="py-16 sm:py-24">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto space-y-3 mb-14">
+          <span class="text-xs font-bold uppercase tracking-widest text-brand-600 dark:text-cyan-400">Soluções Personalizáveis</span>
+          <h2 class="text-2xl sm:text-4xl font-extrabold text-slate-900 dark:text-white">
+            Desenvolvemos qualquer tipo de controle web
+          </h2>
+          <p class="text-slate-600 dark:text-slate-400 text-sm sm:text-base">
+            Comece com o núcleo que resolve sua maior dor e adicione novos módulos conforme sua operação cresce.
+          </p>
+        </div>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 hover:border-cyan-500/50 transition-all shadow-sm">
+            <div class="w-12 h-12 rounded-xl bg-blue-50 dark:bg-sky-950 text-brand-600 dark:text-cyan-400 flex items-center justify-center mb-4">
+              <i data-lucide="clipboard-check" class="w-6 h-6"></i>
+            </div>
+            <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2">Ordens de Serviço e Orçamentos</h3>
+            <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+              Abertura de chamados, status em tempo real, anexos de fotos na nuvem e geração de PDF profissional pronto para enviar no WhatsApp.
+            </p>
+          </div>
+
+          <div class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 hover:border-cyan-500/50 transition-all shadow-sm">
+            <div class="w-12 h-12 rounded-xl bg-emerald-50 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mb-4">
+              <i data-lucide="wallet" class="w-6 h-6"></i>
+            </div>
+            <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2">Controle Financeiro e Cobranças</h3>
+            <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+              Fluxo de caixa, contas a pagar e receber, mensalidades, cálculo automático de multas/juros e filtros por período.
+            </p>
+          </div>
+
+          <div class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 hover:border-cyan-500/50 transition-all shadow-sm">
+            <div class="w-12 h-12 rounded-xl bg-cyan-50 dark:bg-cyan-950 text-cyan-600 dark:text-cyan-400 flex items-center justify-center mb-4">
+              <i data-lucide="calendar-clock" class="w-6 h-6"></i>
+            </div>
+            <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2">Agendamentos, Escalas e Presenças</h3>
+            <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+              Controle de horários, equipes em campo, listas de presença de alunos ou grupos e notificações organizadas.
+            </p>
+          </div>
+
+          <div class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 hover:border-cyan-500/50 transition-all shadow-sm">
+            <div class="w-12 h-12 rounded-xl bg-amber-50 dark:bg-amber-950 text-amber-600 dark:text-amber-400 flex items-center justify-center mb-4">
+              <i data-lucide="users" class="w-6 h-6"></i>
+            </div>
+            <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2">Gestão de Clientes e Fornecedores</h3>
+            <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+              Cadastro completo com validação de CPF/CNPJ, histórico detalhado de atendimentos, compras e busca instantânea.
+            </p>
+          </div>
+
+          <div class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 hover:border-cyan-500/50 transition-all shadow-sm">
+            <div class="w-12 h-12 rounded-xl bg-purple-50 dark:bg-purple-950 text-purple-600 dark:text-purple-400 flex items-center justify-center mb-4">
+              <i data-lucide="shield-check" class="w-6 h-6"></i>
+            </div>
+            <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2">Perfis de Acesso e Segurança</h3>
+            <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+              Controle exatamente o que cada usuário pode ver ou editar (Administrador, Técnico, Recepção), com login ágil por PIN ou senha.
+            </p>
+          </div>
+
+          <div class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 hover:border-cyan-500/50 transition-all shadow-sm">
+            <div class="w-12 h-12 rounded-xl bg-rose-50 dark:bg-rose-950 text-rose-600 dark:text-rose-400 flex items-center justify-center mb-4">
+              <i data-lucide="bar-chart-3" class="w-6 h-6"></i>
+            </div>
+            <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2">Indicadores e Relatórios Gerenciais</h3>
+            <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+              Dashboards limpos com gráficos, tempos médios de execução, produtividade da equipe e exportação rápida de dados.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PORTFÓLIO / CASES REAIS -->
+    <section id="portfolio" class="py-16 sm:py-24 bg-white dark:bg-slate-900/40 border-y border-slate-200/80 dark:border-slate-800/80">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+          <div class="space-y-3 max-w-2xl">
+            <span class="text-xs font-bold uppercase tracking-widest text-brand-600 dark:text-cyan-400">Experiência Comprovada</span>
+            <h2 class="text-2xl sm:text-4xl font-extrabold text-slate-900 dark:text-white">
+              Sistemas reais rodando em nuvem
+            </h2>
+            <p class="text-slate-600 dark:text-slate-400 text-sm sm:text-base">
+              Conheça alguns exemplos de operações que substituíram controles manuais por sistemas web exclusivos.
+            </p>
+          </div>
+          <a href="#contato" class="inline-flex items-center gap-2 text-sm font-bold text-brand-600 dark:text-cyan-400 hover:underline shrink-0">
+            <span>Quero uma demonstração ao vivo</span>
+            <i data-lucide="external-link" class="w-4 h-4"></i>
+          </a>
+        </div>
+
+        <div id="casesGrid" class="grid lg:grid-cols-3 gap-8">
+          
+          <div class="rounded-3xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 overflow-hidden flex flex-col justify-between">
+            <div>
+              <div class="p-6 bg-gradient-to-r from-slate-900 to-slate-800 text-white">
+                <div class="flex items-center justify-between mb-3">
+                  <span class="text-xs font-bold uppercase tracking-wider px-2.5 py-1 rounded-md bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">
+                    Serviços & Campo
+                  </span>
+                  <i data-lucide="wrench" class="w-5 h-5 text-cyan-400"></i>
+                </div>
+                <h3 class="text-xl font-bold">Gestão de Segurança e Climatização</h3>
+                <p class="text-xs text-slate-300 mt-1">Controle completo de equipe técnica, OS e orçamentos</p>
+              </div>
+              <div class="p-6 space-y-4">
+                <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                  Sistema completo para empresa de instalação e manutenção técnica. Substituiu fichas em papel e planilhas dispersas por um fluxo digital integrado.
+                </p>
+                <ul class="space-y-2 text-xs font-medium text-slate-700 dark:text-slate-300">
+                  <li class="flex items-center gap-2">
+                    <i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0"></i>
+                    <span>Orçamentos em PDF com fotos anexadas na nuvem</span>
+                  </li>
+                  <li class="flex items-center gap-2">
+                    <i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0"></i>
+                    <span>Agenda de técnicos e acompanhamento de OS no celular</span>
+                  </li>
+                  <li class="flex items-center gap-2">
+                    <i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0"></i>
+                    <span>Fluxo de caixa, fornecedores e indicadores de tempo</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="px-6 py-4 bg-slate-100/80 dark:bg-slate-800/50 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between text-xs text-slate-500 dark:text-slate-400">
+              <span>Acesso: PC + Smartphone</span>
+              <span class="font-semibold text-emerald-600 dark:text-emerald-400">100% em Nuvem</span>
+            </div>
+          </div>
+
+          <div class="rounded-3xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 overflow-hidden flex flex-col justify-between">
+            <div>
+              <div class="p-6 bg-gradient-to-r from-sky-900 to-blue-900 text-white">
+                <div class="flex items-center justify-between mb-3">
+                  <span class="text-xs font-bold uppercase tracking-wider px-2.5 py-1 rounded-md bg-white/15 text-white border border-white/20">
+                    Esporte & Ensino
+                  </span>
+                  <i data-lucide="award" class="w-5 h-5 text-cyan-300"></i>
+                </div>
+                <h3 class="text-xl font-bold">Gestão de Academia e Artes Marciais</h3>
+                <p class="text-xs text-sky-100 mt-1">Controle de alunos, turmas, graduações e mensalidades</p>
+              </div>
+              <div class="p-6 space-y-4">
+                <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                  Plataforma web personalizada para centro de treinamento esportivo, centralizando matrículas, chamadas diárias e cobranças recorrentes.
+                </p>
+                <ul class="space-y-2 text-xs font-medium text-slate-700 dark:text-slate-300">
+                  <li class="flex items-center gap-2">
+                    <i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0"></i>
+                    <span>Ficha do aluno com foto, planos e histórico de graduação</span>
+                  </li>
+                  <li class="flex items-center gap-2">
+                    <i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0"></i>
+                    <span>Geração em lote de mensalidades e baixa rápida</span>
+                  </li>
+                  <li class="flex items-center gap-2">
+                    <i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0"></i>
+                    <span>Mensagens prontas de cobrança com 1 clique no WhatsApp</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="px-6 py-4 bg-slate-100/80 dark:bg-slate-800/50 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between text-xs text-slate-500 dark:text-slate-400">
+              <span>Acesso: Recepção + Alunos</span>
+              <span class="font-semibold text-emerald-600 dark:text-emerald-400">100% em Nuvem</span>
+            </div>
+          </div>
+
+          <div class="rounded-3xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 overflow-hidden flex flex-col justify-between">
+            <div>
+              <div class="p-6 bg-gradient-to-r from-cyan-900 to-slate-900 text-white">
+                <div class="flex items-center justify-between mb-3">
+                  <span class="text-xs font-bold uppercase tracking-wider px-2.5 py-1 rounded-md bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">
+                    Grupos & Eventos
+                  </span>
+                  <i data-lucide="trophy" class="w-5 h-5 text-amber-400"></i>
+                </div>
+                <h3 class="text-xl font-bold">Gestão de Presença e Rateio Financeiro</h3>
+                <p class="text-xs text-cyan-100 mt-1">Automação de listas, regras próprias e prestação de contas</p>
+              </div>
+              <div class="p-6 space-y-4">
+                <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                  Aplicação web interativa onde cada participante acessa pelo próprio celular para confirmar presença, consultar débitos e acompanhar eventos.
+                </p>
+                <ul class="space-y-2 text-xs font-medium text-slate-700 dark:text-slate-300">
+                  <li class="flex items-center gap-2">
+                    <i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0"></i>
+                    <span>Confirmação individual pelo smartphone em tempo real</span>
+                  </li>
+                  <li class="flex items-center gap-2">
+                    <i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0"></i>
+                    <span>Cálculo automático de mensalidades, faltas e regras</span>
+                  </li>
+                  <li class="flex items-center gap-2">
+                    <i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0"></i>
+                    <span>Exportação instantânea de listas formatadas para grupos</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="px-6 py-4 bg-slate-100/80 dark:bg-slate-800/50 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between text-xs text-slate-500 dark:text-slate-400">
+              <span>Acesso: Multi-usuário</span>
+              <span class="font-semibold text-emerald-600 dark:text-emerald-400">100% em Nuvem</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- COMO FUNCIONA -->
+    <section id="como-funciona" class="py-16 sm:py-24">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto space-y-3 mb-14">
+          <span class="text-xs font-bold uppercase tracking-widest text-brand-600 dark:text-cyan-400">Processo Simples e Transparente</span>
+          <h2 class="text-2xl sm:text-4xl font-extrabold text-slate-900 dark:text-white">
+            Do diagnóstico ao sistema no ar em 4 passos
+          </h2>
+          <p class="text-slate-600 dark:text-slate-400 text-sm sm:text-base">
+            Sem burocracia e sem termos técnicos complicados. Você acompanha tudo de forma clara.
+          </p>
+        </div>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+            <span class="w-10 h-10 rounded-full bg-brand-600 text-white font-extrabold text-sm flex items-center justify-center mb-4">1</span>
+            <h3 class="font-bold text-lg text-slate-900 dark:text-white mb-2">Conversa e Diagnóstico</h3>
+            <p class="text-sm text-slate-600 dark:text-slate-400">
+              Entendemos como sua empresa funciona hoje, onde estão os gargalos e o que você precisa controlar.
+            </p>
+          </div>
+
+          <div class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+            <span class="w-10 h-10 rounded-full bg-brand-600 text-white font-extrabold text-sm flex items-center justify-center mb-4">2</span>
+            <h3 class="font-bold text-lg text-slate-900 dark:text-white mb-2">Proposta Sob Medida</h3>
+            <p class="text-sm text-slate-600 dark:text-slate-400">
+              Apresentamos o escopo exato das telas e funcionalidades, com prazo definido e investimento transparente.
+            </p>
+          </div>
+
+          <div class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+            <span class="w-10 h-10 rounded-full bg-brand-600 text-white font-extrabold text-sm flex items-center justify-center mb-4">3</span>
+            <h3 class="font-bold text-lg text-slate-900 dark:text-white mb-2">Construção e Validação</h3>
+            <p class="text-sm text-slate-600 dark:text-slate-400">
+              Você acompanha o sistema ganhando forma na nuvem e testa no seu próprio celular e computador antes da entrega.
+            </p>
+          </div>
+
+          <div class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+            <span class="w-10 h-10 rounded-full bg-emerald-600 text-white font-extrabold text-sm flex items-center justify-center mb-4">4</span>
+            <h3 class="font-bold text-lg text-slate-900 dark:text-white mb-2">Implantação e Suporte</h3>
+            <p class="text-sm text-slate-600 dark:text-slate-400">
+              Treinamento rápido da sua equipe e suporte contínuo para o sistema evoluir junto com o seu negócio.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTATO / CAPTURA DE LEADS -->
+    <section id="contato" class="py-16 sm:py-24 bg-[#06152d] text-white border-t border-slate-800">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid lg:grid-cols-12 gap-12 items-center">
+          
+          <div class="lg:col-span-6 space-y-6">
+            <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/20 text-cyan-300 text-xs font-bold border border-cyan-500/30">
+              Vamos conversar sobre o seu projeto
+            </span>
+            <h2 class="text-3xl sm:text-4xl font-extrabold leading-tight">
+              Pronto para organizar sua operação com um sistema feito para você?
+            </h2>
+            <p class="text-slate-300 text-base leading-relaxed">
+              Preencha os dados ao lado ou chame diretamente no WhatsApp. Mostramos na prática nossos sistemas funcionando em tempo real e desenhamos uma solução para a sua necessidade, sem compromisso.
+            </p>
+
+            <div class="space-y-4 pt-2">
+              <div class="flex items-center gap-3.5">
+                <div class="w-11 h-11 rounded-xl bg-emerald-500/15 text-emerald-400 flex items-center justify-center shrink-0">
+                  <i data-lucide="message-circle" class="w-5 h-5"></i>
+                </div>
+                <div>
+                  <p class="text-xs text-slate-400">WhatsApp Comercial MAAF SISTEMAS</p>
+                  <a id="directWhatsappLink" href="#" target="_blank" class="font-bold text-white hover:text-emerald-400 transition-colors">
+                    <span id="displayPhoneText">(22) 98139-1262</span> &rarr;
+                  </a>
+                </div>
+              </div>
+
+              <div class="flex items-center gap-3.5">
+                <div class="w-11 h-11 rounded-xl bg-cyan-500/15 text-cyan-400 flex items-center justify-center shrink-0">
+                  <i data-lucide="globe" class="w-5 h-5"></i>
+                </div>
+                <div>
+                  <p class="text-xs text-slate-400">Área de Atuação</p>
+                  <p id="locationText" class="font-semibold text-slate-200 text-sm">Itaperuna - RJ e Atendimento Remoto para todo o Brasil</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="lg:col-span-6">
+            <form id="leadForm" class="p-6 sm:p-8 rounded-3xl bg-white dark:bg-slate-900 text-slate-900 dark:text-white shadow-2xl border border-slate-200 dark:border-slate-800 space-y-4">
+              <h3 class="text-xl font-bold">Solicite uma Demonstração</h3>
+              <p class="text-xs text-slate-500 dark:text-slate-400">
+                Preencha abaixo para registrar sua solicitação e iniciar o atendimento no WhatsApp.
+              </p>
+
+              <div class="grid sm:grid-cols-2 gap-4">
+                <div>
+                  <label for="leadNome" class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">Seu Nome *</label>
+                  <input type="text" id="leadNome" required placeholder="Ex: João Silva"
+                    class="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-sm focus:outline-none focus:ring-2 focus:ring-cyan-500" />
+                </div>
+                <div>
+                  <label for="leadTelefone" class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">Seu WhatsApp *</label>
+                  <input type="tel" id="leadTelefone" required maxlength="15" placeholder="(22) 98139-1262"
+                    class="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-sm focus:outline-none focus:ring-2 focus:ring-cyan-500" />
+                </div>
+              </div>
+
+              <div class="grid sm:grid-cols-2 gap-4">
+                <div>
+                  <label for="leadEmpresa" class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">Empresa / Negócio *</label>
+                  <input type="text" id="leadEmpresa" required placeholder="Ex: Clínica Vida"
+                    class="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-sm focus:outline-none focus:ring-2 focus:ring-cyan-500" />
+                </div>
+                <div>
+                  <label for="leadRamo" class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">Ramo de Atuação</label>
+                  <select id="leadRamo"
+                    class="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-sm focus:outline-none focus:ring-2 focus:ring-cyan-500">
+                    <option value="Prestação de Serviços / OS">Prestação de Serviços / OS</option>
+                    <option value="Comércio / Loja / Estoque">Comércio / Loja / Estoque</option>
+                    <option value="Academia / Escola / Esportes">Academia / Escola / Esportes</option>
+                    <option value="Clínica / Consultório / Saúde">Clínica / Consultório / Saúde</option>
+                    <option value="Associação / Grupo / Eventos">Associação / Grupo / Eventos</option>
+                    <option value="Outro Ramo">Outro Ramo / Controle Específico</option>
+                  </select>
+                </div>
+              </div>
+
+              <div>
+                <label for="leadNecessidade" class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">O que você gostaria de controlar no sistema? *</label>
+                <textarea id="leadNecessidade" rows="3" required placeholder="Ex: Preciso controlar agendamentos, ordens de serviço pelo celular e fluxo de caixa..."
+                  class="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-sm focus:outline-none focus:ring-2 focus:ring-cyan-500"></textarea>
+              </div>
+
+              <button type="submit" id="btnSubmitLead"
+                class="w-full py-4 px-6 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm sm:text-base shadow-lg shadow-emerald-600/25 flex items-center justify-center gap-2.5 transition-all cursor-pointer">
+                <i data-lucide="send" class="w-5 h-5"></i>
+                <span>Enviar e Falar no WhatsApp</span>
+              </button>
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-[#040d1a] text-slate-400 py-8 border-t border-slate-900 text-xs">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div class="flex items-center gap-2.5">
+          <div class="w-7 h-7 rounded-lg bg-gradient-to-br from-blue-600 to-cyan-400 flex items-center justify-center text-white">
+            <i data-lucide="layers" class="w-4 h-4"></i>
+          </div>
+          <span class="font-display font-bold text-sm text-white">MAAF SISTEMAS</span>
+        </div>
+        <p class="text-center sm:text-left">
+          Sistemas Web Sob Medida • 100% em Nuvem • (22) 98139-1262
+        </p>
+        <div class="flex items-center gap-4">
+          <p>&copy; <span id="currentYear"></span> MAAF SISTEMAS.</p>
+          <button onclick="openAdminPortal()" class="text-slate-500 hover:text-cyan-400 transition-colors cursor-pointer">Acesso Restrito</button>
+        </div>
+      </div>
+    </footer>
+
+    <!-- BOTÃO FLUTUANTE WHATSAPP -->
+    <a id="floatingWhatsapp" href="#" target="_blank" aria-label="Falar no WhatsApp"
+      class="fixed bottom-5 right-5 z-30 w-14 h-14 rounded-full bg-emerald-500 hover:bg-emerald-600 text-white shadow-xl shadow-emerald-500/30 flex items-center justify-center transition-transform hover:scale-110">
+      <i data-lucide="message-circle" class="w-7 h-7"></i>
+    </a>
+
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- VIEW 2: PORTAL ADMINISTRATIVO MAAF                                    -->
+  <!-- ===================================================================== -->
+  <div id="adminPortalView" class="hidden min-h-screen flex flex-col bg-slate-100 dark:bg-[#050f1e]">
+
+    <div id="adminLoginScreen" class="flex-1 flex items-center justify-center p-4">
+      <div class="w-full max-w-md rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-2xl p-6 sm:p-8 space-y-6">
+        
+        <div class="flex items-center justify-between">
+          <button onclick="closeAdminPortal()" class="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-500 dark:text-slate-400 hover:text-brand-600 dark:hover:text-cyan-400 cursor-pointer">
+            <i data-lucide="arrow-left" class="w-4 h-4"></i>
+            <span>Voltar ao Site</span>
+          </button>
+
+          <button onclick="toggleTheme()" aria-label="Alternar tema"
+            class="p-2 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800 text-slate-600 dark:text-slate-300 cursor-pointer">
+            <i data-lucide="sun" class="w-4 h-4 hidden dark:block text-amber-400"></i>
+            <i data-lucide="moon" class="w-4 h-4 block dark:hidden"></i>
+          </button>
+        </div>
+
+        <div class="text-center space-y-2">
+          <div class="w-16 h-16 mx-auto rounded-2xl bg-gradient-to-br from-blue-600 to-cyan-400 flex items-center justify-center text-white shadow-lg shadow-cyan-500/20 overflow-hidden">
+            <img src="somentelogo.png" alt="MAAF" class="w-full h-full object-contain p-2" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+            <i data-lucide="layers" class="w-8 h-8 hidden"></i>
+          </div>
+          <h2 class="text-2xl font-extrabold text-slate-900 dark:text-white">MAAF SISTEMAS</h2>
+          <p class="text-xs text-slate-500 dark:text-slate-400">Acesso Administrativo • Gestão de Leads, Usuários e Cases</p>
+        </div>
+
+        <div id="firebaseStatusBadge" class="text-center text-xs py-2 px-3 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">
+          Verificando conexão com banco em nuvem...
+        </div>
+
+        <form id="pinLoginForm" class="space-y-4">
+          <div>
+            <label for="loginPinInput" class="block text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 text-center mb-2">
+              Digite seu PIN de 6 dígitos
+            </label>
+            <input type="password" id="loginPinInput" inputmode="numeric" pattern="[0-9]*" maxlength="6" required
+              placeholder="••••••"
+              class="w-full text-center tracking-[0.6em] text-2xl font-mono font-bold py-3.5 px-4 rounded-2xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-cyan-500" />
+          </div>
+
+          <button type="submit"
+            class="w-full py-3.5 rounded-2xl bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white font-bold text-sm shadow-lg shadow-cyan-500/20 transition-all cursor-pointer">
+            Entrar no Painel
+          </button>
+        </form>
+
+        <div id="firstAdminSetupBox" class="hidden pt-4 border-t border-slate-200 dark:border-slate-800 space-y-3">
+          <div class="p-3 rounded-xl bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800 text-xs text-amber-800 dark:text-amber-200">
+            <strong>Primeiro acesso detectado!</strong> Nenhum administrador encontrado no banco. Cadastre o Administrador Master abaixo:
+          </div>
+          <input type="text" id="setupAdminNome" placeholder="Nome do Administrador (ex: Marcos Almeida)"
+            class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-xs" />
+          <input type="text" id="setupAdminPin" inputmode="numeric" maxlength="6" placeholder="Crie um PIN numérico de 6 dígitos"
+            class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-xs font-mono" />
+          <button type="button" onclick="createFirstAdmin()"
+            class="w-full py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs cursor-pointer">
+            Criar Administrador Master
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <div id="adminDashboardScreen" class="hidden flex-1 flex flex-col">
+      
+      <header class="sticky top-0 z-30 bg-white/90 dark:bg-slate-900/90 glass-nav border-b border-slate-200 dark:border-slate-800 px-4 sm:px-6 h-16 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-blue-600 to-cyan-400 flex items-center justify-center text-white">
+            <i data-lucide="layers" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <h1 class="font-display font-extrabold text-sm sm:text-base leading-none">MAAF ADMIN</h1>
+            <p id="loggedUserLabel" class="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">Olá, Administrador</p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <button onclick="closeAdminPortal()" class="px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-700 text-xs font-semibold hover:bg-slate-100 dark:hover:bg-slate-800 flex items-center gap-1.5 cursor-pointer">
+            <i data-lucide="globe" class="w-4 h-4 text-cyan-500"></i>
+            <span class="hidden sm:inline">Ver Site</span>
+          </button>
+
+          <button onclick="toggleTheme()" class="p-2 rounded-xl border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 cursor-pointer">
+            <i data-lucide="sun" class="w-4 h-4 hidden dark:block text-amber-400"></i>
+            <i data-lucide="moon" class="w-4 h-4 block dark:hidden"></i>
+          </button>
+
+          <button onclick="logoutAdmin()" class="px-3 py-2 rounded-xl bg-rose-500/10 text-rose-600 dark:text-rose-400 hover:bg-rose-500/20 text-xs font-bold flex items-center gap-1.5 cursor-pointer">
+            <i data-lucide="log-out" class="w-4 h-4"></i>
+            <span>Sair</span>
+          </button>
+        </div>
+      </header>
+
+      <div class="bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 px-4 sm:px-6">
+        <div class="max-w-6xl mx-auto flex items-center gap-2 overflow-x-auto no-scrollbar py-2">
+          <button onclick="switchAdminTab('leads')" id="tabBtn-leads"
+            class="admin-tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold flex items-center gap-2 bg-brand-600 text-white shrink-0 cursor-pointer">
+            <i data-lucide="inbox" class="w-4 h-4"></i>
+            <span>Leads & Orçamentos</span>
+            <span id="leadsCountBadge" class="px-1.5 py-0.5 text-[10px] rounded-full bg-white/20">0</span>
+          </button>
+
+          <button onclick="switchAdminTab('usuarios')" id="tabBtn-usuarios"
+            class="admin-tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold flex items-center gap-2 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 shrink-0 cursor-pointer">
+            <i data-lucide="users" class="w-4 h-4"></i>
+            <span>Usuários & Acessos</span>
+          </button>
+
+          <button onclick="switchAdminTab('cases')" id="tabBtn-cases"
+            class="admin-tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold flex items-center gap-2 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 shrink-0 cursor-pointer">
+            <i data-lucide="briefcase" class="w-4 h-4"></i>
+            <span>Cases do Portfólio</span>
+          </button>
+        </div>
+      </div>
+
+      <main class="flex-1 max-w-6xl w-full mx-auto p-4 sm:p-6 space-y-6">
+        
+        <section id="adminTab-leads" class="space-y-4">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div>
+              <h2 class="text-lg font-extrabold">Solicitações Recebidas pelo Site</h2>
+              <p class="text-xs text-slate-500 dark:text-slate-400">Leads gravados automaticamente em tempo real na coleção <code class="font-mono">leads</code>.</p>
+            </div>
+            <select id="filterLeadStatus" onchange="renderLeadsList()"
+              class="px-3.5 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 text-xs font-semibold">
+              <option value="TODOS">Todos os Status</option>
+              <option value="Novo">Novos</option>
+              <option value="Em Negociação">Em Negociação</option>
+              <option value="Fechado">Fechados</option>
+              <option value="Arquivado">Arquivados</option>
+            </select>
+          </div>
+
+          <div id="leadsListContainer" class="grid md:grid-cols-2 gap-4">
+            <div class="p-8 text-center text-sm text-slate-500 col-span-full bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800">
+              Carregando leads da nuvem...
+            </div>
+          </div>
+        </section>
+
+        <section id="adminTab-usuarios" class="hidden space-y-6">
+          <div class="grid lg:grid-cols-12 gap-6">
+            <div class="lg:col-span-5">
+              <form id="userForm" class="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 space-y-4">
+                <h3 id="userFormTitle" class="font-bold text-base">Cadastrar Usuário / Admin</h3>
+                <input type="hidden" id="editUserId" />
+
+                <div>
+                  <label class="block text-xs font-semibold mb-1">Nome Completo *</label>
+                  <input type="text" id="userName" required placeholder="Ex: Marcos Almeida"
+                    class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-sm" />
+                </div>
+
+                <div class="grid grid-cols-2 gap-3">
+                  <div>
+                    <label class="block text-xs font-semibold mb-1">PIN (6 dígitos) *</label>
+                    <input type="text" id="userPin" inputmode="numeric" pattern="[0-9]{6}" maxlength="6" required placeholder="123456"
+                      class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-sm font-mono" />
+                  </div>
+                  <div>
+                    <label class="block text-xs font-semibold mb-1">Perfil de Acesso</label>
+                    <select id="userRole"
+                      class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-sm">
+                      <option value="Admin">Administrador</option>
+                      <option value="Operacional">Operacional</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div>
+                  <label class="block text-xs font-semibold mb-1">Status</label>
+                  <select id="userStatus"
+                    class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-sm">
+                    <option value="Ativo">Ativo</option>
+                    <option value="Inativo">Inativo</option>
+                  </select>
+                </div>
+
+                <div class="flex gap-2 pt-1">
+                  <button type="submit" class="flex-1 py-2.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-bold text-xs cursor-pointer">
+                    Salvar Usuário
+                  </button>
+                  <button type="button" onclick="resetUserForm()" class="px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 text-xs font-semibold cursor-pointer">
+                    Limpar
+                  </button>
+                </div>
+              </form>
+            </div>
+
+            <div class="lg:col-span-7 space-y-3">
+              <h3 class="font-bold text-base">Usuários Cadastrados na MAAF</h3>
+              <div id="usersListContainer" class="space-y-3"></div>
+            </div>
+          </div>
+        </section>
+
+        <section id="adminTab-cases" class="hidden space-y-6">
+          <div class="grid lg:grid-cols-12 gap-6">
+            <div class="lg:col-span-5">
+              <form id="caseForm" class="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 space-y-4">
+                <h3 class="font-bold text-base">Adicionar Novo Case ao Site</h3>
+                <p class="text-xs text-slate-500">Aparece automaticamente na vitrine de portfólio da Landing Page.</p>
+
+                <div>
+                  <label class="block text-xs font-semibold mb-1">Segmento / Tag *</label>
+                  <input type="text" id="caseTag" required placeholder="Ex: Clínica & Saúde"
+                    class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-sm" />
+                </div>
+
+                <div>
+                  <label class="block text-xs font-semibold mb-1">Título do Sistema *</label>
+                  <input type="text" id="caseTitulo" required placeholder="Ex: Gestão de Consultórios e Prontuários"
+                    class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-sm" />
+                </div>
+
+                <div>
+                  <label class="block text-xs font-semibold mb-1">Subtítulo Curto *</label>
+                  <input type="text" id="caseSubtitulo" required placeholder="Ex: Agenda médica, receitas e financeiro"
+                    class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-sm" />
+                </div>
+
+                <div>
+                  <label class="block text-xs font-semibold mb-1">Descrição do Desafio Resolvido *</label>
+                  <textarea id="caseDescricao" rows="3" required placeholder="Explique brevemente como o sistema transformou a rotina do cliente..."
+                    class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-sm"></textarea>
+                </div>
+
+                <div>
+                  <label class="block text-xs font-semibold mb-1">Imagem/Print do Sistema (Opcional - Cloudinary)</label>
+                  <input type="file" id="caseImageFile" accept="image/*"
+                    class="w-full text-xs text-slate-500 file:mr-3 file:py-2 file:px-3 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100" />
+                </div>
+
+                <button type="submit" id="btnSaveCase" class="w-full py-3 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-bold text-xs cursor-pointer">
+                  Publicar Case no Site
+                </button>
+              </form>
+            </div>
+
+            <div class="lg:col-span-7 space-y-3">
+              <h3 class="font-bold text-base">Cases Dinâmicos Publicados</h3>
+              <div id="adminCasesListContainer" class="space-y-3"></div>
+            </div>
+          </div>
+        </section>
+
+      </main>
+    </div>
+
+  </div>
+
+  <!-- TOAST DE NOTIFICAÇÃO -->
+  <div id="toastNotification" class="fixed bottom-5 left-1/2 -translate-x-1/2 z-50 hidden px-5 py-3 rounded-2xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-xs sm:text-sm font-semibold shadow-2xl border border-slate-700 dark:border-slate-200">
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- FIREBASE SDK & LÓGICA COMPLETA DA APLICAÇÃO                           -->
+  <!-- ===================================================================== -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import {
+      getFirestore, collection, addDoc, getDocs, doc, updateDoc, deleteDoc,
+      onSnapshot, query, orderBy, where, serverTimestamp
+    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+    let db = null;
+    let firebaseReady = false;
+    let currentUser = null;
+    let unsubLeads = null;
+    let unsubUsers = null;
+    let unsubCases = null;
+    let allLeads = [];
+    let inactivityTimer = null;
+
+    try {
+      const app = initializeApp(CONFIG.FIREBASE);
+      db = getFirestore(app);
+      firebaseReady = true;
+      updateFirebaseBadge(true, "Conectado à Nuvem (Firebase: maafsistemas)");
+      listenPublicCases();
+    } catch (err) {
+      console.error("Erro ao iniciar Firebase:", err);
+      updateFirebaseBadge(false, "Erro ao conectar ao Firebase.");
+    }
+
+    function updateFirebaseBadge(ok, msg) {
+      const el = document.getElementById("firebaseStatusBadge");
+      if (!el) return;
+      el.textContent = msg;
+      el.className = ok
+        ? "text-center text-xs py-2 px-3 rounded-xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 font-semibold"
+        : "text-center text-xs py-2 px-3 rounded-xl bg-amber-500/10 text-amber-700 dark:text-amber-300 font-semibold";
+    }
+
+    document.getElementById("leadForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const btn = document.getElementById("btnSubmitLead");
+      btn.disabled = true;
+      btn.innerHTML = `<span>Registrando solicitação...</span>`;
+
+      const nome = document.getElementById("leadNome").value.trim();
+      const telefone = document.getElementById("leadTelefone").value.trim();
+      const empresa = document.getElementById("leadEmpresa").value.trim();
+      const ramo = document.getElementById("leadRamo").value;
+      const necessidade = document.getElementById("leadNecessidade").value.trim();
+
+      if (firebaseReady && db) {
+        try {
+          await addDoc(collection(db, "leads"), {
+            nome,
+            telefone,
+            empresa,
+            ramo,
+            necessidade,
+            status: "Novo",
+            criadoEm: serverTimestamp(),
+            dataTexto: new Date().toLocaleString("pt-BR")
+          });
+        } catch (err) {
+          console.error("Erro ao salvar lead no Firestore:", err);
+        }
+      }
+
+      const msg =
+        `Olá! Vim pelo site da *MAAF SISTEMAS* e gostaria de solicitar uma demonstração/orçamento.\n\n` +
+        `*Nome:* ${nome}\n` +
+        `*WhatsApp:* ${telefone}\n` +
+        `*Empresa:* ${empresa}\n` +
+        `*Ramo:* ${ramo}\n` +
+        `*O que preciso controlar:* ${necessidade}`;
+
+      const waUrl = `https://wa.me/${CONFIG.WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
+      window.open(waUrl, "_blank");
+
+      e.target.reset();
+      btn.disabled = false;
+      btn.innerHTML = `<i data-lucide="send" class="w-5 h-5"></i><span>Enviar e Falar no WhatsApp</span>`;
+      lucide.createIcons();
+      showToast("Solicitação registrada! Redirecionando para o WhatsApp...");
+    });
+
+    window.openAdminPortal = async function () {
+      document.getElementById("publicView").classList.add("hidden");
+      document.getElementById("adminPortalView").classList.remove("hidden");
+      window.scrollTo(0, 0);
+
+      if (firebaseReady && db) {
+        try {
+          const snap = await getDocs(collection(db, "usuarios"));
+          if (snap.empty) {
+            document.getElementById("firstAdminSetupBox").classList.remove("hidden");
+          } else {
+            document.getElementById("firstAdminSetupBox").classList.add("hidden");
+          }
+        } catch (err) {
+          console.error("Erro ao verificar usuários:", err);
+        }
+      }
+    };
+
+    window.closeAdminPortal = function () {
+      document.getElementById("adminPortalView").classList.add("hidden");
+      document.getElementById("publicView").classList.remove("hidden");
+      window.scrollTo(0, 0);
+    };
+
+    window.createFirstAdmin = async function () {
+      if (!firebaseReady || !db) {
+        return showToast("Banco Firebase indisponível.");
+      }
+      const nome = document.getElementById("setupAdminNome").value.trim();
+      const pin = document.getElementById("setupAdminPin").value.trim();
+
+      if (!nome || !/^\d{6}$/.test(pin)) {
+        return showToast("Informe o nome e um PIN numérico de exatamente 6 dígitos.");
+      }
+
+      try {
+        const docRef = await addDoc(collection(db, "usuarios"), {
+          nome,
+          pin,
+          role: "Admin",
+          status: "Ativo",
+          criadoEm: serverTimestamp()
+        });
+        document.getElementById("firstAdminSetupBox").classList.add("hidden");
+        enterDashboard({ id: docRef.id, nome, role: "Admin" });
+        showToast("Administrador Master criado com sucesso!");
+      } catch (err) {
+        console.error(err);
+        showToast("Erro ao criar administrador. Verifique as regras do Firestore.");
+      }
+    };
+
+    document.getElementById("pinLoginForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const pin = document.getElementById("loginPinInput").value.trim();
+
+      if (!/^\d{6}$/.test(pin)) {
+        return showToast("Digite um PIN válido de 6 números.");
+      }
+
+      if (!firebaseReady || !db) {
+        return showToast("Banco de dados Firebase indisponível.");
+      }
+
+      try {
+        const q = query(collection(db, "usuarios"), where("pin", "==", pin), where("status", "==", "Ativo"));
+        const snap = await getDocs(q);
+
+        if (snap.empty) {
+          showToast("PIN inválido ou usuário inativo.");
+          document.getElementById("loginPinInput").value = "";
+          return;
+        }
+
+        const userDoc = snap.docs[0];
+        enterDashboard({ id: userDoc.id, ...userDoc.data() });
+        document.getElementById("loginPinInput").value = "";
+      } catch (err) {
+        console.error("Erro no login:", err);
+        showToast("Erro ao autenticar na nuvem.");
+      }
+    });
+
+    function enterDashboard(user) {
+      currentUser = user;
+      document.getElementById("adminLoginScreen").classList.add("hidden");
+      document.getElementById("adminDashboardScreen").classList.remove("hidden");
+      document.getElementById("loggedUserLabel").textContent = `${user.nome} (${user.role})`;
+      startAdminListeners();
+      resetInactivityTimer();
+    }
+
+    window.logoutAdmin = function () {
+      currentUser = null;
+      if (unsubLeads) unsubLeads();
+      if (unsubUsers) unsubUsers();
+      if (unsubCases) unsubCases();
+      clearTimeout(inactivityTimer);
+      document.getElementById("adminDashboardScreen").classList.add("hidden");
+      document.getElementById("adminLoginScreen").classList.remove("hidden");
+      showToast("Sessão encerrada com segurança.");
+    };
+
+    function resetInactivityTimer() {
+      if (!currentUser) return;
+      clearTimeout(inactivityTimer);
+      inactivityTimer = setTimeout(() => {
+        if (currentUser) {
+          logoutAdmin();
+          showToast("Sessão encerrada por inatividade.");
+        }
+      }, CONFIG.INATIVIDADE_MINUTOS * 60 * 1000);
+    }
+    ["click", "keypress", "touchstart"].forEach(evt => {
+      document.addEventListener(evt, resetInactivityTimer);
+    });
+
+    function startAdminListeners() {
+      if (!firebaseReady || !db) return;
+
+      const qLeads = query(collection(db, "leads"), orderBy("criadoEm", "desc"));
+      unsubLeads = onSnapshot(qLeads, (snap) => {
+        allLeads = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+        const novos = allLeads.filter(l => l.status === "Novo").length;
+        document.getElementById("leadsCountBadge").textContent = novos;
+        renderLeadsList();
+      });
+
+      unsubUsers = onSnapshot(collection(db, "usuarios"), (snap) => {
+        const users = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+        renderUsersList(users);
+      });
+
+      unsubCases = onSnapshot(collection(db, "cases"), (snap) => {
+        const cases = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+        renderAdminCasesList(cases);
+      });
+    }
+
+    window.renderLeadsList = function () {
+      const container = document.getElementById("leadsListContainer");
+      const filter = document.getElementById("filterLeadStatus").value;
+      const filtered = filter === "TODOS" ? allLeads : allLeads.filter(l => l.status === filter);
+
+      if (filtered.length === 0) {
+        container.innerHTML = `
+          <div class="p-8 text-center text-sm text-slate-500 col-span-full bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800">
+            Nenhum lead encontrado para este filtro.
+          </div>`;
+        return;
+      }
+
+      container.innerHTML = filtered.map(lead => {
+        const phoneDigits = (lead.telefone || "").replace(/\D/g, "");
+        const waReply = `https://wa.me/55${phoneDigits}?text=${encodeURIComponent(`Olá, ${lead.nome}! Aqui é da MAAF SISTEMAS (${CONFIG.TELEFONE_FORMATADO}). Recebemos sua solicitação sobre um sistema para ${lead.empresa}. Podemos conversar?`)}`;
+
+        return `
+          <div class="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 space-y-3 flex flex-col justify-between">
+            <div class="space-y-2">
+              <div class="flex items-start justify-between gap-2">
+                <div>
+                  <h4 class="font-bold text-base text-slate-900 dark:text-white">${escapeHtml(lead.nome)}</h4>
+                  <p class="text-xs font-semibold text-brand-600 dark:text-cyan-400">${escapeHtml(lead.empresa)} • ${escapeHtml(lead.ramo)}</p>
+                </div>
+                <select onchange="updateLeadStatus('${lead.id}', this.value)"
+                  class="text-xs font-bold px-2.5 py-1 rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800">
+                  <option value="Novo" ${lead.status === 'Novo' ? 'selected' : ''}>Novo</option>
+                  <option value="Em Negociação" ${lead.status === 'Em Negociação' ? 'selected' : ''}>Em Negociação</option>
+                  <option value="Fechado" ${lead.status === 'Fechado' ? 'selected' : ''}>Fechado</option>
+                  <option value="Arquivado" ${lead.status === 'Arquivado' ? 'selected' : ''}>Arquivado</option>
+                </select>
+              </div>
+              <p class="text-xs text-slate-600 dark:text-slate-300 bg-slate-50 dark:bg-slate-800/60 p-3 rounded-xl">
+                "${escapeHtml(lead.necessidade)}"
+              </p>
+            </div>
+            <div class="pt-2 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs">
+              <span class="text-slate-400">${lead.dataTexto || ""}</span>
+              <div class="flex items-center gap-2">
+                <a href="${waReply}" target="_blank" class="px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white font-bold inline-flex items-center gap-1">
+                  <span>WhatsApp</span>
+                </a>
+                <button onclick="deleteLead('${lead.id}')" class="p-1.5 rounded-lg text-rose-500 hover:bg-rose-500/10 cursor-pointer" title="Excluir">
+                  <i data-lucide="trash-2" class="w-4 h-4"></i>
+                </button>
+              </div>
+            </div>
+          </div>`;
+      }).join("");
+      lucide.createIcons();
+    };
+
+    window.updateLeadStatus = async function (id, status) {
+      await updateDoc(doc(db, "leads", id), { status });
+      showToast(`Status atualizado para "${status}".`);
+    };
+
+    window.deleteLead = async function (id) {
+      if (!confirm("Deseja excluir esta solicitação?")) return;
+      await deleteDoc(doc(db, "leads", id));
+      showToast("Lead removido.");
+    };
+
+    document.getElementById("userForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const id = document.getElementById("editUserId").value;
+      const nome = document.getElementById("userName").value.trim();
+      const pin = document.getElementById("userPin").value.trim();
+      const role = document.getElementById("userRole").value;
+      const status = document.getElementById("userStatus").value;
+
+      if (!/^\d{6}$/.test(pin)) {
+        return showToast("O PIN deve conter exatamente 6 dígitos numéricos.");
+      }
+
+      if (id) {
+        await updateDoc(doc(db, "usuarios", id), { nome, pin, role, status });
+        showToast("Usuário atualizado!");
+      } else {
+        await addDoc(collection(db, "usuarios"), { nome, pin, role, status, criadoEm: serverTimestamp() });
+        showToast("Novo usuário cadastrado!");
+      }
+      resetUserForm();
+    });
+
+    window.resetUserForm = function () {
+      document.getElementById("userForm").reset();
+      document.getElementById("editUserId").value = "";
+      document.getElementById("userFormTitle").textContent = "Cadastrar Usuário / Admin";
+    };
+
+    window.editUser = function (id, nome, pin, role, status) {
+      document.getElementById("editUserId").value = id;
+      document.getElementById("userName").value = nome;
+      document.getElementById("userPin").value = pin;
+      document.getElementById("userRole").value = role;
+      document.getElementById("userStatus").value = status;
+      document.getElementById("userFormTitle").textContent = "Editar Usuário";
+    };
+
+    window.deleteUser = async function (id) {
+      if (currentUser && currentUser.id === id) {
+        return showToast("Você não pode excluir o próprio usuário logado.");
+      }
+      if (!confirm("Remover este usuário?")) return;
+      await deleteDoc(doc(db, "usuarios", id));
+      showToast("Usuário removido.");
+    };
+
+    function renderUsersList(users) {
+      const container = document.getElementById("usersListContainer");
+      if (users.length === 0) {
+        container.innerHTML = `<p class="text-xs text-slate-500">Nenhum usuário cadastrado.</p>`;
+        return;
+      }
+      container.innerHTML = users.map(u => `
+        <div class="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex items-center justify-between gap-3">
+          <div>
+            <div class="flex items-center gap-2">
+              <p class="font-bold text-sm">${escapeHtml(u.nome)}</p>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded-full ${u.status === 'Ativo' ? 'bg-emerald-500/15 text-emerald-600 dark:text-emerald-400' : 'bg-rose-500/15 text-rose-500'}">
+                ${u.status}
+              </span>
+            </div>
+            <p class="text-xs text-slate-500 mt-0.5">Perfil: <strong>${u.role}</strong> • PIN: <span class="font-mono">••••${(u.pin || '').slice(-2)}</span></p>
+          </div>
+          <div class="flex items-center gap-1.5">
+            <button onclick="editUser('${u.id}', '${escapeHtml(u.nome)}', '${u.pin}', '${u.role}', '${u.status}')"
+              class="p-2 rounded-xl border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer" title="Editar">
+              <i data-lucide="pencil" class="w-4 h-4"></i>
+            </button>
+            <button onclick="deleteUser('${u.id}')"
+              class="p-2 rounded-xl text-rose-500 hover:bg-rose-500/10 cursor-pointer" title="Excluir">
+              <i data-lucide="trash-2" class="w-4 h-4"></i>
+            </button>
+          </div>
+        </div>
+      `).join("");
+      lucide.createIcons();
+    }
+
+    async function uploadToCloudinary(file) {
+      if (!file || !CONFIG.CLOUDINARY.cloudName || CONFIG.CLOUDINARY.cloudName === "SEU_CLOUD_NAME") {
+        return "";
+      }
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("upload_preset", CONFIG.CLOUDINARY.uploadPreset);
+
+      const res = await fetch(`https://api.cloudinary.com/v1_1/${CONFIG.CLOUDINARY.cloudName}/image/upload`, {
+        method: "POST",
+        body: formData
+      });
+      const data = await res.json();
+      return data.secure_url || "";
+    }
+
+    document.getElementById("caseForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const btn = document.getElementById("btnSaveCase");
+      btn.disabled = true;
+      btn.textContent = "Publicando...";
+
+      try {
+        const tag = document.getElementById("caseTag").value.trim();
+        const titulo = document.getElementById("caseTitulo").value.trim();
+        const subtitulo = document.getElementById("caseSubtitulo").value.trim();
+        const descricao = document.getElementById("caseDescricao").value.trim();
+        const file = document.getElementById("caseImageFile").files[0];
+
+        let imageUrl = "";
+        if (file) {
+          imageUrl = await uploadToCloudinary(file);
+        }
+
+        await addDoc(collection(db, "cases"), {
+          tag, titulo, subtitulo, descricao, imageUrl, criadoEm: serverTimestamp()
+        });
+
+        e.target.reset();
+        showToast("Novo case publicado na vitrine do site!");
+      } catch (err) {
+        console.error(err);
+        showToast("Erro ao publicar case.");
+      } finally {
+        btn.disabled = false;
+        btn.textContent = "Publicar Case no Site";
+      }
+    });
+
+    function renderAdminCasesList(cases) {
+      const container = document.getElementById("adminCasesListContainer");
+      if (cases.length === 0) {
+        container.innerHTML = `<p class="text-xs text-slate-500 bg-white dark:bg-slate-900 p-4 rounded-2xl border border-slate-200 dark:border-slate-800">Nenhum case extra publicado ainda. Os 3 cases padrão continuam visíveis no site.</p>`;
+        return;
+      }
+      container.innerHTML = cases.map(c => `
+        <div class="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex items-center justify-between gap-3">
+          <div class="flex items-center gap-3">
+            ${c.imageUrl ? `<img src="${c.imageUrl}" class="w-12 h-12 rounded-xl object-cover shrink-0" />` : ''}
+            <div>
+              <span class="text-[10px] font-bold uppercase text-cyan-600 dark:text-cyan-400">${escapeHtml(c.tag)}</span>
+              <h4 class="font-bold text-sm">${escapeHtml(c.titulo)}</h4>
+              <p class="text-xs text-slate-500">${escapeHtml(c.subtitulo)}</p>
+            </div>
+          </div>
+          <button onclick="deleteCase('${c.id}')" class="p-2 rounded-xl text-rose-500 hover:bg-rose-500/10 cursor-pointer">
+            <i data-lucide="trash-2" class="w-4 h-4"></i>
+          </button>
+        </div>
+      `).join("");
+      lucide.createIcons();
+    }
+
+    window.deleteCase = async function (id) {
+      if (!confirm("Remover este case do portfólio?")) return;
+      await deleteDoc(doc(db, "cases", id));
+      showToast("Case removido.");
+    };
+
+    function listenPublicCases() {
+      onSnapshot(collection(db, "cases"), (snap) => {
+        const grid = document.getElementById("casesGrid");
+        grid.querySelectorAll(".dynamic-case-card").forEach(el => el.remove());
+
+        snap.docs.forEach(d => {
+          const c = d.data();
+          const card = document.createElement("div");
+          card.className = "dynamic-case-card rounded-3xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 overflow-hidden flex flex-col justify-between";
+          card.innerHTML = `
+            <div>
+              <div class="p-6 bg-gradient-to-r from-blue-900 to-slate-900 text-white">
+                <div class="flex items-center justify-between mb-3">
+                  <span class="text-xs font-bold uppercase tracking-wider px-2.5 py-1 rounded-md bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">
+                    ${escapeHtml(c.tag)}
+                  </span>
+                  <i data-lucide="layers" class="w-5 h-5 text-cyan-400"></i>
+                </div>
+                <h3 class="text-xl font-bold">${escapeHtml(c.titulo)}</h3>
+                <p class="text-xs text-slate-300 mt-1">${escapeHtml(c.subtitulo)}</p>
+              </div>
+              ${c.imageUrl ? `<img src="${c.imageUrl}" alt="${escapeHtml(c.titulo)}" class="w-full h-44 object-cover border-b border-slate-200 dark:border-slate-800" />` : ''}
+              <div class="p-6">
+                <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">${escapeHtml(c.descricao)}</p>
+              </div>
+            </div>
+            <div class="px-6 py-4 bg-slate-100/80 dark:bg-slate-800/50 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between text-xs text-slate-500 dark:text-slate-400">
+              <span>Sistema Sob Medida</span>
+              <span class="font-semibold text-emerald-600 dark:text-emerald-400">100% em Nuvem</span>
+            </div>
+          `;
+          grid.appendChild(card);
+        });
+        lucide.createIcons();
+      });
+    }
+
+    function escapeHtml(str) {
+      return String(str || "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
+    }
+  </script>
+
+  <!-- SCRIPTS DE INTERFACE -->
+  <script>
+    lucide.createIcons();
+    document.getElementById("currentYear").textContent = new Date().getFullYear();
+    document.getElementById("locationText").textContent = CONFIG.CIDADE_REGIAO;
+    document.getElementById("displayPhoneText").textContent = CONFIG.TELEFONE_FORMATADO;
+
+    const defaultMsg = encodeURIComponent("Olá! Vim pelo site da MAAF SISTEMAS e gostaria de saber mais sobre um sistema web personalizado.");
+    const waBaseUrl = `https://wa.me/${CONFIG.WHATSAPP_NUMBER}?text=${defaultMsg}`;
+    document.getElementById("directWhatsappLink").href = waBaseUrl;
+    document.getElementById("floatingWhatsapp").href = waBaseUrl;
+
+    function applySavedTheme() {
+      const saved = localStorage.getItem("maaf_theme");
+      if (saved === "light") {
+        document.documentElement.classList.remove("dark");
+      } else {
+        document.documentElement.classList.add("dark");
+      }
+    }
+    applySavedTheme();
+
+    function toggleTheme() {
+      document.documentElement.classList.toggle("dark");
+      const isDark = document.documentElement.classList.contains("dark");
+      localStorage.setItem("maaf_theme", isDark ? "dark" : "light");
+    }
+
+    const mobileMenuBtn = document.getElementById("mobileMenuBtn");
+    const mobileMenu = document.getElementById("mobileMenu");
+    mobileMenuBtn.addEventListener("click", () => mobileMenu.classList.toggle("hidden"));
+    document.querySelectorAll(".mobile-link").forEach(el => {
+      el.addEventListener("click", () => mobileMenu.classList.add("hidden"));
+    });
+
+    document.getElementById("leadTelefone").addEventListener("input", function (e) {
+      let v = e.target.value.replace(/\D/g, "").slice(0, 11);
+      if (v.length > 6) {
+        v = v.replace(/^(\d{2})(\d{5})(\d{0,4}).*/, "($1) $2-$3");
+      } else if (v.length > 2) {
+        v = v.replace(/^(\d{2})(\d{0,5})/, "($1) $2");
+      } else if (v.length > 0) {
+        v = v.replace(/^(\d*)/, "($1");
+      }
+      e.target.value = v;
+    });
+
+    ["loginPinInput", "setupAdminPin", "userPin"].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) {
+        el.addEventListener("input", (e) => {
+          e.target.value = e.target.value.replace(/\D/g, "").slice(0, 6);
+        });
+      }
+    });
+
+    function switchAdminTab(tab) {
+      ["leads", "usuarios", "cases"].forEach(t => {
+        document.getElementById(`adminTab-${t}`).classList.add("hidden");
+        const btn = document.getElementById(`tabBtn-${t}`);
+        btn.classList.remove("bg-brand-600", "text-white");
+        btn.classList.add("text-slate-600", "dark:text-slate-300");
+      });
+      document.getElementById(`adminTab-${tab}`).classList.remove("hidden");
+      const activeBtn = document.getElementById(`tabBtn-${tab}`);
+      activeBtn.classList.add("bg-brand-600", "text-white");
+      activeBtn.classList.remove("text-slate-600", "dark:text-slate-300");
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById("toastNotification");
+      toast.textContent = msg;
+      toast.classList.remove("hidden");
+      setTimeout(() => toast.classList.add("hidden"), 3500);
+    }
+  </script>
+</body>
+</html>
