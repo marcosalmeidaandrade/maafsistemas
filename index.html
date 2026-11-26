@@ -10,9 +10,11 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="MAAF SISTEMAS" />
-  <link rel="icon" type="image/png" href="somentelogo.png" />
-  <link rel="apple-touch-icon" href="somentelogo.png" />
-  <link id="pwaManifestLink" rel="manifest" />
+
+  <!-- Manifesto Estático e Ícones Reais -->
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="icon" type="image/png" href="/somentelogo.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/somentelogo.png" />
 
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -131,7 +133,7 @@
         
         <a href="#" class="flex items-center gap-3 group">
           <div class="maaf-brand-badge w-11 h-11 sm:w-12 sm:h-12 group-hover:scale-105 transition-transform">
-            <img src="somentelogo.png" alt="MAAF SISTEMAS" class="maaf-brand-img" />
+            <img src="/somentelogo.png" alt="MAAF SISTEMAS" class="maaf-brand-img" />
           </div>
           <div class="flex flex-col">
             <span class="font-display font-extrabold text-lg sm:text-xl tracking-tight leading-none text-slate-900 dark:text-white">
@@ -151,7 +153,7 @@
         </nav>
 
         <div class="flex items-center gap-2 sm:gap-2.5">
-          <!-- Botão Instalar Aplicativo (PWA) -->
+          <!-- Botão Instalar Aplicativo -->
           <button id="headerInstallBtn" onclick="triggerInstallApp()" title="Instalar aplicativo MAAF SISTEMAS"
             class="px-3 py-2 sm:px-3.5 sm:py-2.5 rounded-xl border border-cyan-500/40 bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-700 dark:text-cyan-300 transition-colors flex items-center gap-1.5 text-xs font-bold cursor-pointer">
             <i data-lucide="download" class="w-4 h-4"></i>
@@ -774,7 +776,7 @@
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
         <div class="flex items-center gap-2.5">
           <div class="maaf-brand-badge w-8 h-8">
-            <img src="somentelogo.png" alt="MAAF SISTEMAS" class="maaf-brand-img" />
+            <img src="/somentelogo.png" alt="MAAF SISTEMAS" class="maaf-brand-img" />
           </div>
           <span class="font-display font-bold text-sm text-white">MAAF <span class="text-cyan-400">SISTEMAS</span></span>
         </div>
@@ -819,7 +821,7 @@
 
         <div class="text-center space-y-2">
           <div class="maaf-brand-badge w-20 h-20 mx-auto">
-            <img src="somentelogo.png" alt="MAAF SISTEMAS" class="maaf-brand-img" />
+            <img src="/somentelogo.png" alt="MAAF SISTEMAS" class="maaf-brand-img" />
           </div>
           <h2 class="text-2xl font-extrabold text-slate-900 dark:text-white">MAAF <span class="text-cyan-500">SISTEMAS</span></h2>
           <p class="text-xs text-slate-500 dark:text-slate-400">Acesso Administrativo • Gestão de Leads, Usuários e Cases</p>
@@ -867,7 +869,7 @@
       <header class="sticky top-0 z-30 bg-white/90 dark:bg-slate-900/90 glass-nav border-b border-slate-200 dark:border-slate-800 px-4 sm:px-6 h-16 flex items-center justify-between">
         <div class="flex items-center gap-3">
           <div class="maaf-brand-badge w-10 h-10">
-            <img src="somentelogo.png" alt="MAAF SISTEMAS" class="maaf-brand-img" />
+            <img src="/somentelogo.png" alt="MAAF SISTEMAS" class="maaf-brand-img" />
           </div>
           <div>
             <h1 class="font-display font-extrabold text-sm sm:text-base leading-none">MAAF <span class="text-cyan-500">ADMIN</span></h1>
@@ -1567,7 +1569,7 @@
     }
   </script>
 
-  <!-- SCRIPTS DE INTERFACE & PWA INSTALÁVEL -->
+  <!-- SCRIPTS DE INTERFACE & INSTALAÇÃO NATIVA -->
   <script>
     lucide.createIcons();
     document.getElementById("currentYear").textContent = new Date().getFullYear();
@@ -1644,63 +1646,35 @@
     }
 
     // ---------------------------------------------------------------------
-    // PWA EM ARQUIVO ÚNICO: MANIFEST DINÂMICO + SERVICE WORKER SEGURO
+    // INSTALAÇÃO NATIVA (USA /manifest.json ESTÁTICO + SERVICE WORKER)
     // ---------------------------------------------------------------------
     let deferredInstallPrompt = null;
 
-    (function setupSingleFilePWA() {
-      try {
-        const iconUrl = new URL("somentelogo.png", window.location.href).href;
-        const manifestObj = {
-          name: "MAAF SISTEMAS",
-          short_name: "MAAF SISTEMAS",
-          description: "Sistemas web personalizados 100% em nuvem para smartphones e navegadores.",
-          start_url: window.location.pathname || "/",
-          scope: "/",
-          display: "standalone",
-          background_color: "#061224",
-          theme_color: "#061224",
-          orientation: "portrait-primary",
-          icons: [
-            { src: iconUrl, sizes: "192x192", type: "image/png", purpose: "any" },
-            { src: iconUrl, sizes: "512x512", type: "image/png", purpose: "any maskable" }
-          ]
-        };
-        const manifestBlob = new Blob([JSON.stringify(manifestObj)], { type: "application/manifest+json" });
-        const manifestLink = document.getElementById("pwaManifestLink");
-        if (manifestLink) {
-          manifestLink.href = URL.createObjectURL(manifestBlob);
-        }
-
-        if ("serviceWorker" in navigator && window.location.protocol.startsWith("http")) {
-          const swCode = `
-            const CACHE_NAME = 'maaf-sistemas-v1';
-            self.addEventListener('install', (event) => {
-              self.skipWaiting();
-            });
-            self.addEventListener('activate', (event) => {
-              event.waitUntil(
-                caches.keys().then((keys) =>
-                  Promise.all(keys.filter((k) => k !== CACHE_NAME).map((k) => caches.delete(k)))
-                )
-              );
-              self.clients.claim();
-            });
-            self.addEventListener('fetch', (event) => {
-              if (event.request.method !== 'GET') return;
-              event.respondWith(
-                fetch(event.request).catch(() => caches.match(event.request))
-              );
-            });
-          `;
-          const swBlob = new Blob([swCode], { type: "application/javascript" });
-          const swUrl = URL.createObjectURL(swBlob);
-          navigator.serviceWorker.register(swUrl).catch(() => {});
-        }
-      } catch (e) {
-        console.warn("PWA init aviso:", e);
-      }
-    })();
+    if ("serviceWorker" in navigator && window.location.protocol.startsWith("http")) {
+      const swCode = `
+        const CACHE_NAME = 'maaf-sistemas-v2';
+        self.addEventListener('install', (event) => {
+          self.skipWaiting();
+        });
+        self.addEventListener('activate', (event) => {
+          event.waitUntil(
+            caches.keys().then((keys) =>
+              Promise.all(keys.filter((k) => k !== CACHE_NAME).map((k) => caches.delete(k)))
+            )
+          );
+          self.clients.claim();
+        });
+        self.addEventListener('fetch', (event) => {
+          if (event.request.method !== 'GET') return;
+          event.respondWith(
+            fetch(event.request).catch(() => caches.match(event.request))
+          );
+        });
+      `;
+      const swBlob = new Blob([swCode], { type: "application/javascript" });
+      const swUrl = URL.createObjectURL(swBlob);
+      navigator.serviceWorker.register(swUrl).catch(() => {});
+    }
 
     window.addEventListener("beforeinstallprompt", (e) => {
       e.preventDefault();
