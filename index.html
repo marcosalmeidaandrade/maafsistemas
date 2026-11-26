@@ -66,6 +66,33 @@
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
+    /* Área segura superior para barra de status / notch em smartphones e PWA */
+    .maaf-safe-header {
+      padding-top: env(safe-area-inset-top, 0px);
+      min-height: calc(4.25rem + env(safe-area-inset-top, 0px));
+    }
+    @media (min-width: 640px) {
+      .maaf-safe-header {
+        min-height: calc(5rem + env(safe-area-inset-top, 0px));
+      }
+    }
+    .maaf-hero-safe {
+      padding-top: calc(6.5rem + env(safe-area-inset-top, 0px));
+    }
+    @media (min-width: 640px) {
+      .maaf-hero-safe {
+        padding-top: calc(8.5rem + env(safe-area-inset-top, 0px));
+      }
+    }
+    .maaf-page-safe {
+      padding-top: calc(5.25rem + env(safe-area-inset-top, 0px));
+    }
+    @media (min-width: 640px) {
+      .maaf-page-safe {
+        padding-top: calc(6.5rem + env(safe-area-inset-top, 0px));
+      }
+    }
+
     /* Preserva fielmente somentelogo.png sem distorção ou redesenho */
     .maaf-brand-badge {
       border-radius: 9999px;
@@ -128,18 +155,18 @@
   <div id="publicView">
 
     <!-- NAVBAR -->
-    <header class="fixed top-0 inset-x-0 z-40 glass-nav bg-white/85 dark:bg-[#061224]/85 border-b border-slate-200/80 dark:border-slate-800/80 transition-colors">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between">
+    <header class="fixed top-0 inset-x-0 z-40 glass-nav bg-white/85 dark:bg-[#061224]/85 border-b border-slate-200/80 dark:border-slate-800/80 transition-colors maaf-safe-header flex flex-col justify-center">
+      <div class="max-w-7xl w-full mx-auto px-3.5 sm:px-6 lg:px-8 py-2 flex items-center justify-between gap-2">
         
-        <a href="#" class="flex items-center gap-3 group">
-          <div class="maaf-brand-badge w-11 h-11 sm:w-12 sm:h-12 group-hover:scale-105 transition-transform">
+        <a href="#" class="flex items-center gap-2 sm:gap-3 group min-w-0">
+          <div class="maaf-brand-badge w-9 h-9 sm:w-12 sm:h-12 group-hover:scale-105 transition-transform">
             <img src="/somentelogo.png" alt="MAAF SISTEMAS" class="maaf-brand-img" />
           </div>
-          <div class="flex flex-col">
-            <span class="font-display font-extrabold text-lg sm:text-xl tracking-tight leading-none text-slate-900 dark:text-white">
+          <div class="flex flex-col min-w-0">
+            <span class="font-display font-extrabold text-sm sm:text-xl tracking-tight leading-none text-slate-900 dark:text-white truncate">
               MAAF <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500 dark:from-cyan-400 dark:to-sky-300">SISTEMAS</span>
             </span>
-            <span class="text-[10px] sm:text-[11px] font-semibold text-slate-500 dark:text-slate-400 tracking-wider uppercase mt-1">
+            <span class="text-[9px] sm:text-[11px] font-semibold text-slate-500 dark:text-slate-400 tracking-wider uppercase mt-0.5 truncate">
               Sistemas Web em Nuvem
             </span>
           </div>
@@ -152,21 +179,21 @@
           <a href="#como-funciona" class="hover:text-brand-600 dark:hover:text-cyan-400 transition-colors">Como Funciona</a>
         </nav>
 
-        <div class="flex items-center gap-2 sm:gap-2.5">
+        <div class="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
           <button id="headerInstallBtn" onclick="triggerInstallApp()" title="Instalar aplicativo MAAF SISTEMAS"
-            class="px-3 py-2 sm:px-3.5 sm:py-2.5 rounded-xl border border-cyan-500/40 bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-700 dark:text-cyan-300 transition-colors flex items-center gap-1.5 text-xs font-bold cursor-pointer">
+            class="p-2 sm:px-3.5 sm:py-2.5 rounded-xl border border-cyan-500/40 bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-700 dark:text-cyan-300 transition-colors flex items-center gap-1.5 text-xs font-bold cursor-pointer">
             <i data-lucide="download" class="w-4 h-4"></i>
             <span class="hidden sm:inline">Instalar App</span>
           </button>
 
           <button onclick="toggleTheme()" aria-label="Alternar tema" title="Alternar tema claro/escuro"
-            class="p-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-100/80 dark:bg-slate-900 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors cursor-pointer">
+            class="p-2 sm:p-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-100/80 dark:bg-slate-900 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors cursor-pointer">
             <i data-lucide="sun" class="w-4 h-4 sm:w-5 sm:h-5 hidden dark:block text-amber-400"></i>
             <i data-lucide="moon" class="w-4 h-4 sm:w-5 sm:h-5 block dark:hidden text-slate-700"></i>
           </button>
 
           <button onclick="openAdminPortal()" title="Área Administrativa MAAF"
-            class="p-2.5 sm:px-3.5 sm:py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-100/80 dark:bg-slate-900 text-slate-700 dark:text-slate-300 hover:border-brand-500/50 hover:text-brand-600 dark:hover:text-cyan-400 transition-colors flex items-center gap-1.5 text-xs font-semibold cursor-pointer">
+            class="p-2 sm:px-3.5 sm:py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-100/80 dark:bg-slate-900 text-slate-700 dark:text-slate-300 hover:border-brand-500/50 hover:text-brand-600 dark:hover:text-cyan-400 transition-colors flex items-center gap-1.5 text-xs font-semibold cursor-pointer">
             <i data-lucide="shield" class="w-4 h-4"></i>
             <span class="hidden lg:inline">Admin</span>
           </button>
@@ -176,7 +203,7 @@
             <i data-lucide="arrow-right" class="w-4 h-4"></i>
           </a>
 
-          <button id="mobileMenuBtn" aria-label="Abrir menu" class="md:hidden p-2.5 rounded-xl border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300">
+          <button id="mobileMenuBtn" aria-label="Abrir menu" class="md:hidden p-2 rounded-xl border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300">
             <i data-lucide="menu" class="w-5 h-5"></i>
           </button>
         </div>
@@ -201,7 +228,7 @@
     </header>
 
     <!-- HERO SECTION -->
-    <section class="relative pt-28 pb-16 sm:pt-36 sm:pb-24 overflow-hidden">
+    <section class="relative maaf-hero-safe pb-16 sm:pb-24 overflow-hidden">
       <div class="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
         <div class="absolute -top-24 left-1/2 -translate-x-1/2 w-[900px] h-[450px] bg-gradient-to-tr from-blue-600/15 via-cyan-400/10 to-transparent rounded-full blur-3xl"></div>
       </div>
@@ -687,26 +714,26 @@
   <div id="caseDetailView" class="hidden min-h-screen flex flex-col bg-slate-50 dark:bg-[#061224]">
     
     <!-- Barra Superior da Página do Case -->
-    <header class="sticky top-0 z-40 glass-nav bg-white/85 dark:bg-[#061224]/85 border-b border-slate-200/80 dark:border-slate-800/80">
-      <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between gap-3">
-        <button onclick="closeCaseDetail()" class="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-100 dark:bg-slate-900 hover:border-cyan-500/50 text-xs sm:text-sm font-bold cursor-pointer">
+    <header class="sticky top-0 z-40 glass-nav bg-white/85 dark:bg-[#061224]/85 border-b border-slate-200/80 dark:border-slate-800/80 maaf-safe-header flex flex-col justify-center">
+      <div class="max-w-5xl w-full mx-auto px-3.5 sm:px-6 lg:px-8 py-2 flex items-center justify-between gap-2">
+        <button onclick="closeCaseDetail()" class="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-100 dark:bg-slate-900 hover:border-cyan-500/50 text-xs sm:text-sm font-bold cursor-pointer">
           <i data-lucide="arrow-left" class="w-4 h-4 text-cyan-500"></i>
-          <span>Voltar ao Site</span>
+          <span>Voltar</span>
         </button>
 
-        <div class="flex items-center gap-2">
+        <div class="flex items-center gap-1.5 sm:gap-2">
           <button onclick="triggerInstallApp()" class="hidden sm:inline-flex items-center gap-1.5 px-3 py-2 rounded-xl border border-cyan-500/40 bg-cyan-500/10 text-cyan-700 dark:text-cyan-300 text-xs font-bold cursor-pointer">
             <i data-lucide="download" class="w-4 h-4"></i>
             <span>Instalar App</span>
           </button>
 
           <button onclick="toggleTheme()" aria-label="Alternar tema"
-            class="p-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-100 dark:bg-slate-900 text-slate-700 dark:text-slate-300 cursor-pointer">
+            class="p-2 sm:p-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-100 dark:bg-slate-900 text-slate-700 dark:text-slate-300 cursor-pointer">
             <i data-lucide="sun" class="w-4 h-4 hidden dark:block text-amber-400"></i>
             <i data-lucide="moon" class="w-4 h-4 block dark:hidden"></i>
           </button>
 
-          <button onclick="requestSimilarCase()" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 text-white text-xs sm:text-sm font-bold shadow-md cursor-pointer">
+          <button onclick="requestSimilarCase()" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 text-white text-xs sm:text-sm font-bold shadow-md cursor-pointer">
             <span>Quero um Igual</span>
             <i data-lucide="arrow-right" class="w-4 h-4"></i>
           </button>
@@ -715,7 +742,7 @@
     </header>
 
     <!-- Conteúdo Exclusivo do Case -->
-    <main id="caseDetailContent" class="flex-1 max-w-5xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 space-y-10"></main>
+    <main id="caseDetailContent" class="flex-1 max-w-5xl w-full mx-auto px-4 sm:px-6 lg:px-8 maaf-page-safe pb-12 space-y-10"></main>
 
     <!-- Rodapé Curto da Página do Case -->
     <footer class="bg-[#040d1a] text-slate-400 py-6 border-t border-slate-900 text-xs">
@@ -738,7 +765,7 @@
   <!-- ===================================================================== -->
   <div id="adminPortalView" class="hidden min-h-screen flex flex-col bg-slate-100 dark:bg-[#050f1e]">
 
-    <div id="adminLoginScreen" class="flex-1 flex items-center justify-center p-4">
+    <div id="adminLoginScreen" class="flex-1 flex items-center justify-center p-4 maaf-page-safe">
       <div class="w-full max-w-md rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-2xl p-6 sm:p-8 space-y-6">
         
         <div class="flex items-center justify-between">
@@ -801,32 +828,34 @@
 
     <div id="adminDashboardScreen" class="hidden flex-1 flex flex-col">
       
-      <header class="sticky top-0 z-30 bg-white/90 dark:bg-slate-900/90 glass-nav border-b border-slate-200 dark:border-slate-800 px-4 sm:px-6 h-16 flex items-center justify-between">
-        <div class="flex items-center gap-3">
-          <div class="maaf-brand-badge w-10 h-10">
-            <img src="/somentelogo.png" alt="MAAF SISTEMAS" class="maaf-brand-img" />
+      <header class="sticky top-0 z-30 bg-white/90 dark:bg-slate-900/90 glass-nav border-b border-slate-200 dark:border-slate-800 px-4 sm:px-6 maaf-safe-header flex flex-col justify-center">
+        <div class="max-w-6xl w-full mx-auto py-2 flex items-center justify-between gap-2">
+          <div class="flex items-center gap-3 min-w-0">
+            <div class="maaf-brand-badge w-9 h-9 sm:w-10 sm:h-10">
+              <img src="/somentelogo.png" alt="MAAF SISTEMAS" class="maaf-brand-img" />
+            </div>
+            <div class="min-w-0">
+              <h1 class="font-display font-extrabold text-sm sm:text-base leading-none truncate">MAAF <span class="text-cyan-500">ADMIN</span></h1>
+              <p id="loggedUserLabel" class="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5 truncate">Olá, Administrador</p>
+            </div>
           </div>
-          <div>
-            <h1 class="font-display font-extrabold text-sm sm:text-base leading-none">MAAF <span class="text-cyan-500">ADMIN</span></h1>
-            <p id="loggedUserLabel" class="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">Olá, Administrador</p>
+
+          <div class="flex items-center gap-1.5 sm:gap-2 shrink-0">
+            <button onclick="closeAdminPortal()" class="px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-700 text-xs font-semibold hover:bg-slate-100 dark:hover:bg-slate-800 flex items-center gap-1.5 cursor-pointer">
+              <i data-lucide="globe" class="w-4 h-4 text-cyan-500"></i>
+              <span class="hidden sm:inline">Ver Site</span>
+            </button>
+
+            <button onclick="toggleTheme()" class="p-2 rounded-xl border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 cursor-pointer">
+              <i data-lucide="sun" class="w-4 h-4 hidden dark:block text-amber-400"></i>
+              <i data-lucide="moon" class="w-4 h-4 block dark:hidden"></i>
+            </button>
+
+            <button onclick="logoutAdmin()" class="px-3 py-2 rounded-xl bg-rose-500/10 text-rose-600 dark:text-rose-400 hover:bg-rose-500/20 text-xs font-bold flex items-center gap-1.5 cursor-pointer">
+              <i data-lucide="log-out" class="w-4 h-4"></i>
+              <span>Sair</span>
+            </button>
           </div>
-        </div>
-
-        <div class="flex items-center gap-2">
-          <button onclick="closeAdminPortal()" class="px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-700 text-xs font-semibold hover:bg-slate-100 dark:hover:bg-slate-800 flex items-center gap-1.5 cursor-pointer">
-            <i data-lucide="globe" class="w-4 h-4 text-cyan-500"></i>
-            <span class="hidden sm:inline">Ver Site</span>
-          </button>
-
-          <button onclick="toggleTheme()" class="p-2 rounded-xl border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 cursor-pointer">
-            <i data-lucide="sun" class="w-4 h-4 hidden dark:block text-amber-400"></i>
-            <i data-lucide="moon" class="w-4 h-4 block dark:hidden"></i>
-          </button>
-
-          <button onclick="logoutAdmin()" class="px-3 py-2 rounded-xl bg-rose-500/10 text-rose-600 dark:text-rose-400 hover:bg-rose-500/20 text-xs font-bold flex items-center gap-1.5 cursor-pointer">
-            <i data-lucide="log-out" class="w-4 h-4"></i>
-            <span>Sair</span>
-          </button>
         </div>
       </header>
 
@@ -940,7 +969,6 @@
         <section id="adminTab-cases" class="hidden space-y-6">
           <div class="grid lg:grid-cols-12 gap-6">
             
-            <!-- Formulário Criar / Editar Case -->
             <div class="lg:col-span-6">
               <form id="caseForm" class="p-5 sm:p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 space-y-4">
                 <div class="flex items-center justify-between">
@@ -988,7 +1016,6 @@
                     class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-sm"></textarea>
                 </div>
 
-                <!-- Tela do Sistema em Questão -->
                 <div class="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 space-y-2">
                   <label class="block text-xs font-bold text-cyan-700 dark:text-cyan-300">Tela Principal do Sistema em Questão</label>
                   <input type="hidden" id="caseScreenUrl" />
@@ -997,7 +1024,6 @@
                   <p id="caseScreenPreviewLabel" class="text-[11px] text-slate-500">Nenhuma tela selecionada no momento.</p>
                 </div>
 
-                <!-- Depoimento com Foto do Proprietário -->
                 <div class="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 space-y-3">
                   <p class="text-xs font-bold text-cyan-700 dark:text-cyan-300">Depoimento do Proprietário</p>
                   <div class="grid sm:grid-cols-2 gap-3">
@@ -1017,7 +1043,6 @@
                   </div>
                 </div>
 
-                <!-- Gerenciamento de Várias Fotos com Explicação Individual -->
                 <div class="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 space-y-3">
                   <p class="text-xs font-bold text-cyan-700 dark:text-cyan-300">Galeria de Fotos com Explicação sobre Cada Foto</p>
                   <input type="file" id="galleryPhotoFile" accept="image/*"
@@ -1038,7 +1063,6 @@
               </form>
             </div>
 
-            <!-- Lista de Cases para Editar, Abrir Página ou Excluir -->
             <div class="lg:col-span-6 space-y-3">
               <h3 class="font-bold text-base">Cases Cadastrados (Padrão + Nuvem)</h3>
               <div id="adminCasesListContainer" class="space-y-3"></div>
@@ -1109,7 +1133,6 @@
     let activeCaseForLead = null;
     let inactivityTimer = null;
 
-    // 3 Cases padrão completos (podem ser abertos na página exclusiva ou editados/complementados via Firestore)
     const DEFAULT_CASES = [
       {
         id: "default-climatizacao",
@@ -1204,9 +1227,6 @@
         : "text-center text-xs py-2 px-3 rounded-xl bg-amber-500/10 text-amber-700 dark:text-amber-300 font-semibold";
     }
 
-    // ---------------------------------------------------------------------
-    // PÁGINA EXCLUSIVA DO CASE (ABERTURA, EDIÇÃO COMPLETA, GALERIA & DEPOIMENTO)
-    // ---------------------------------------------------------------------
     function getAllCasesMerged() {
       const overridesById = {};
       const extraCases = [];
@@ -1297,7 +1317,6 @@
 
       const contentEl = document.getElementById("caseDetailContent");
       contentEl.innerHTML = `
-        <!-- Cabeçalho do Case -->
         <div class="space-y-4">
           <div class="flex flex-wrap items-center gap-2">
             <span class="px-3 py-1 rounded-full bg-cyan-500/15 text-cyan-700 dark:text-cyan-300 border border-cyan-500/30 text-xs font-bold uppercase tracking-wider">
@@ -1315,7 +1334,6 @@
           </p>
         </div>
 
-        <!-- Tela do Sistema em Questão -->
         <div class="rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 overflow-hidden shadow-lg">
           <div class="px-5 py-3.5 bg-slate-100 dark:bg-slate-800/80 border-b border-slate-200 dark:border-slate-700 flex items-center justify-between">
             <span class="text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-300 flex items-center gap-2">
@@ -1346,7 +1364,6 @@
           `}
         </div>
 
-        <!-- Textos Longos: Desafio e Solução -->
         <div class="grid md:grid-cols-2 gap-6">
           <div class="p-6 sm:p-8 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 space-y-3">
             <h2 class="text-lg sm:text-xl font-extrabold text-slate-900 dark:text-white flex items-center gap-2">
@@ -1365,7 +1382,6 @@
           </div>
         </div>
 
-        <!-- Galeria de Várias Fotos com Explicação Individual -->
         <div class="space-y-4">
           <div>
             <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-white">
@@ -1397,7 +1413,6 @@
           `}
         </div>
 
-        <!-- Depoimento com Foto do Proprietário -->
         ${(depo.texto || depo.nome || depo.fotoUrl) ? `
           <div class="p-6 sm:p-8 rounded-3xl bg-gradient-to-br from-blue-950/90 to-slate-900 text-white border border-sky-800/60 shadow-xl">
             <div class="flex flex-col sm:flex-row items-start sm:items-center gap-5">
@@ -1422,7 +1437,6 @@
           </div>
         ` : ''}
 
-        <!-- CTA Final do Case -->
         <div class="p-6 sm:p-8 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div>
             <h3 class="text-lg font-extrabold text-slate-900 dark:text-white">Quer um sistema web sob medida para o seu ramo?</h3>
@@ -1475,9 +1489,6 @@
       document.getElementById("lightboxImg").src = "";
     };
 
-    // ---------------------------------------------------------------------
-    // FORMULÁRIO PÚBLICO DE LEADS (GRAVA NO FIRESTORE + ABRE WHATSAPP)
-    // ---------------------------------------------------------------------
     document.getElementById("leadForm").addEventListener("submit", async (e) => {
       e.preventDefault();
       const btn = document.getElementById("btnSubmitLead");
@@ -1525,9 +1536,6 @@
       showToast("Solicitação registrada! Redirecionando para o WhatsApp...");
     });
 
-    // ---------------------------------------------------------------------
-    // PORTAL ADMINISTRATIVO & AUTENTICAÇÃO POR PIN (6 DÍGITOS)
-    // ---------------------------------------------------------------------
     window.openAdminPortal = async function () {
       document.getElementById("publicView").classList.add("hidden");
       document.getElementById("caseDetailView").classList.add("hidden");
@@ -1812,9 +1820,6 @@
       lucide.createIcons();
     }
 
-    // ---------------------------------------------------------------------
-    // CLOUDINARY UPLOAD + GESTÃO COMPLETA DE CASES (TEXTOS, TELA, DEPOIMENTO, GALERIA)
-    // ---------------------------------------------------------------------
     async function uploadToCloudinary(file) {
       if (!file || !CONFIG.CLOUDINARY.cloudName || !CONFIG.CLOUDINARY.uploadPreset) {
         return "";
@@ -2165,7 +2170,7 @@
 
     if ("serviceWorker" in navigator && window.location.protocol.startsWith("http")) {
       const swCode = `
-        const CACHE_NAME = 'maaf-sistemas-v3';
+        const CACHE_NAME = 'maaf-sistemas-v4';
         self.addEventListener('install', (event) => {
           self.skipWaiting();
         });
